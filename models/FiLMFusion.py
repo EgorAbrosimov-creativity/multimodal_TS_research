@@ -77,14 +77,16 @@ class Model(nn.Module):
                                 head_dropout=configs.dropout)
 
         # ── Text encoder + FiLM projections ──────────────────────────────
-        text_model = getattr(configs, 'text_model', 'bert-base-uncased')
-        self.text_encoder = TextEncoder(model_name=text_model)
+        text_model  = getattr(configs, 'text_model', 'sentence-transformers/all-MiniLM-L6-v2')
+        text_source = getattr(configs, 'text_source', 'template')
+        self.text_encoder = TextEncoder(
+            model_name=text_model, random_mode=(text_source == 'random'))
         text_hidden = self.text_encoder.hidden_dim
 
         self.film_gamma = nn.Linear(text_hidden, configs.d_model)
         self.film_beta  = nn.Linear(text_hidden, configs.d_model)
 
-    def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, mask=None):
+    def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, mask=None, text_emb=None):
         B = x_enc.size(0)
 
         # ── Normalization ─────────────────────────────────────────────────
@@ -98,16 +100,15 @@ class Model(nn.Module):
         enc_out, n_vars = self.patch_embedding(x)             # [B*n_vars, patch_num, d_model]
         enc_out, _ = self.encoder(enc_out)                    # [B*n_vars, patch_num, d_model]
 
-        # Reshape: [B, n_vars, patch_num, d_model]
         patch_num = enc_out.shape[1]
-        enc_out = enc_out.reshape(B, n_vars, patch_num, -1)
+        enc_out = enc_out.reshape(B, n_vars, patch_num, -1)  # [B, n_vars, patch_num, d_model]
 
         # ── FiLM modulation ───────────────────────────────────────────────
-        texts = generate_ts_description(x_enc, self.dataset_name, self.pred_len)
-        text_emb = self.text_encoder(texts)                   # [B, 768]
+        if text_emb is None:
+            texts = generate_ts_description(x_enc, self.dataset_name, self.pred_len, x_mark_enc)
+            text_emb = self.text_encoder(texts)               # [B, text_hidden]
         gamma = self.film_gamma(text_emb)                     # [B, d_model]
         beta  = self.film_beta(text_emb)                      # [B, d_model]
-        # broadcast over n_vars and patch_num dimensions
         gamma = gamma.unsqueeze(1).unsqueeze(2)               # [B, 1, 1, d_model]
         beta  = beta.unsqueeze(1).unsqueeze(2)
         enc_out = gamma * enc_out + beta                      # [B, n_vars, patch_num, d_model]

@@ -109,7 +109,7 @@ def spawner(x, labels, sigma=0.05, verbose=0):
     # use verbose=-1 to turn off warnings
     # use verbose=1 to print out figures
     
-    import utils.dtw as dtw
+    import utils.data.dtw as dtw
     random_points = np.random.randint(low=1, high=x.shape[1]-1, size=x.shape[0])
     window = np.ceil(x.shape[1] / 10.).astype(int)
     orig_steps = np.arange(x.shape[1])
@@ -147,7 +147,7 @@ def wdba(x, labels, batch_size=6, slope_constraint="symmetric", use_window=True,
     # use verbose = -1 to turn off warnings    
     # slope_constraint is for DTW. "symmetric" or "asymmetric"
     x = np.array(x)
-    import utils.dtw as dtw
+    import utils.data.dtw as dtw
     
     if use_window:
         window = np.ceil(x.shape[1] / 10.).astype(int)
@@ -209,7 +209,7 @@ def random_guided_warp(x, labels, slope_constraint="symmetric", use_window=True,
     # slope_constraint is for DTW. "symmetric" or "asymmetric"
     # dtw_type is for shapeDTW or DTW. "normal" or "shape"
     
-    import utils.dtw as dtw
+    import utils.data.dtw as dtw
     
     if use_window:
         window = np.ceil(x.shape[1] / 10.).astype(int)
@@ -252,7 +252,7 @@ def discriminative_guided_warp(x, labels, batch_size=6, slope_constraint="symmet
     # slope_constraint is for DTW. "symmetric" or "asymmetric"
     # dtw_type is for shapeDTW or DTW. "normal" or "shape"
     
-    import utils.dtw as dtw
+    import utils.data.dtw as dtw
     
     if use_window:
         window = np.ceil(x.shape[1] / 10.).astype(int)
@@ -384,7 +384,7 @@ def run_augmentation_single(x, y, args):
 
 
 def augment(x, y, args):
-    import utils.augmentation as aug
+    import utils.data.augmentation as aug
     augmentation_tags = ""
     if args.jitter:
         x = aug.jitter(x)

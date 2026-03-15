@@ -209,6 +209,11 @@ __marimo__/
 # Claude Code
 .claude/
 
+# Local research notes (uppercase .md files except README)
+CLAUDE.md
+GENERAL_DESIGN.md
+ITERATION*.md
+
 # Datasets (download from source — see README)
 dataset/ETT-small/
 dataset/electricity/

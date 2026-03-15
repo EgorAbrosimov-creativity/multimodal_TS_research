@@ -20,8 +20,8 @@ from collections import OrderedDict
 import numpy as np
 import pandas as pd
 
-from data_provider.m4 import M4Dataset
-from data_provider.m4 import M4Meta
+from utils.data_provider.m4 import M4Dataset
+from utils.data_provider.m4 import M4Meta
 import os
 
 

@@ -1,6 +1,6 @@
 import platform
 from torch.utils.data import DataLoader, Subset
-from data_provider.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom
+from utils.data_provider.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom
 
 DATA_DICT = {
     'ETTh1': Dataset_ETT_hour,
@@ -28,6 +28,11 @@ def data_provider(config, flag):
     shuffle = flag == 'train'
     train_fraction = train_cfg.get('train_fraction', 1.0)
 
+    # Derive split-specific embedding path by replacing '_train_' in the base path
+    base_emb_path = data_cfg.get('text_emb_path', None)
+    if base_emb_path and flag != 'train':
+        base_emb_path = base_emb_path.replace('_train_', f'_{flag}_')
+
     dataset = DatasetClass(
         root_path=data_cfg['root_path'],
         flag=flag,
@@ -38,6 +43,7 @@ def data_provider(config, flag):
         scale=True,
         timeenc=1,
         freq=data_cfg.get('freq', 'h'),
+        text_emb_path=base_emb_path,
     )
 
     # Apply train_fraction: keep the MOST RECENT fraction of training windows

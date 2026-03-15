@@ -73,8 +73,10 @@ class Model(nn.Module):
                                    head_dropout=configs.dropout)
 
         # ── Text branch ───────────────────────────────────────────────────
-        text_model = getattr(configs, 'text_model', 'bert-base-uncased')
-        self.text_encoder = TextEncoder(model_name=text_model)
+        text_model  = getattr(configs, 'text_model', 'sentence-transformers/all-MiniLM-L6-v2')
+        text_source = getattr(configs, 'text_source', 'template')
+        self.text_encoder = TextEncoder(
+            model_name=text_model, random_mode=(text_source == 'random'))
         text_hidden = self.text_encoder.hidden_dim
         self.text_head = nn.Sequential(
             nn.Linear(text_hidden, text_hidden // 2),
@@ -107,13 +109,14 @@ class Model(nn.Module):
         ts_out = ts_out + means[:, 0, :].unsqueeze(1).expand_as(ts_out)
         return ts_out
 
-    def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, mask=None):
+    def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, mask=None, text_emb=None):
         B = x_enc.size(0)
 
         ts_out = self._ts_encode(x_enc)                       # [B, pred_len, enc_in]
 
-        texts = generate_ts_description(x_enc, self.dataset_name, self.pred_len)
-        text_emb = self.text_encoder(texts)                   # [B, 768]
+        if text_emb is None:
+            texts = generate_ts_description(x_enc, self.dataset_name, self.pred_len, x_mark_enc)
+            text_emb = self.text_encoder(texts)               # [B, text_hidden]
         text_out = self.text_head(text_emb)                   # [B, pred_len * enc_in]
         text_out = text_out.view(B, self.pred_len, self.enc_in)
 
