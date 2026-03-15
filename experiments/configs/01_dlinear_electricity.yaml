@@ -1,0 +1,41 @@
+name: dlinear_electricity_pred96
+description: DLinear baseline on Electricity, pred_len=96
+
+model:
+  name: DLinear
+  task_name: long_term_forecast
+  enc_in: 321
+  seq_len: 512
+  label_len: 48
+  pred_len: 96
+  moving_avg: 25
+  individual: false
+  # unused by DLinear but required by config_to_namespace for compatibility
+  d_model: 64
+  n_heads: 4
+  e_layers: 2
+  d_layers: 1
+  d_ff: 256
+  factor: 1
+  dropout: 0.05
+  activation: gelu
+
+data:
+  dataset: custom
+  root_path: ./dataset/electricity/
+  data_path: electricity.csv
+  features: M
+  target: OT
+  freq: h
+
+training:
+  train_epochs: 15
+  batch_size: 32
+  learning_rate: 0.005
+  patience: 5
+  seed: 2024
+
+compute:
+  gpu: 0
+  num_workers: 4
+  use_amp: false
