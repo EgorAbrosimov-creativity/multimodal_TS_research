@@ -129,6 +129,7 @@ def model_cfg(model_name: str, enc_in: int, seq_len: int,
         'factor': 1,
         'dropout': 0.2,
         'activation': 'gelu',
+        'moving_avg': 25,
     }
     if model_name in TEXT_MODELS:
         cfg['text_model'] = TEXT_MODEL_NAME
@@ -156,7 +157,7 @@ def compute_cfg() -> dict:
     return {'gpu': 0, 'num_workers': 4, 'use_amp': True}
 
 
-def diag_cfg(model_name: str) -> dict | None:
+def diag_cfg(model_name: str):
     flags = DIAG_FLAGS.get(model_name)
     if not flags:
         return None
@@ -177,9 +178,14 @@ def write_config(path: Path, config: dict):
 
 # ── Track generators ──────────────────────────────────────────────────────────
 
+def _emb_path(emb_dir: str, ds_name: str) -> str:
+    """Build text_emb_path for the train split. Factory derives val/test from this."""
+    return f'{emb_dir.rstrip("/")}/{ds_name}_train_minilm.npy'
+
+
 def gen_d_series(models: list[str], datasets: list[str],
                  fractions: list[float], horizons: list[int],
-                 text_sources: list[str]) -> int:
+                 text_sources: list[str], emb_dir: str = None) -> int:
     """D-series: description quality ablation."""
     count = 0
     for model_name in models:
@@ -195,6 +201,9 @@ def gen_d_series(models: list[str], datasets: list[str],
                                 f"_src{src}_f{fraction_str(frac)}"
                                 f"_h{horizon}_s{seed}"
                             )
+                            data_cfg = {k: v for k, v in ds.items() if k != 'enc_in'}
+                            if emb_dir and src != 'random' and model_name in TEXT_MODELS:
+                                data_cfg['text_emb_path'] = _emb_path(emb_dir, ds_name)
                             config = {
                                 'name': exp_name,
                                 'description': (
@@ -202,7 +211,7 @@ def gen_d_series(models: list[str], datasets: list[str],
                                     f"text_source={src} fraction={frac} pred={horizon} seed={seed}"
                                 ),
                                 'model': model_cfg(model_name, ds['enc_in'], 512, horizon, src),
-                                'data': {k: v for k, v in ds.items() if k != 'enc_in'},
+                                'data': data_cfg,
                                 'training': training_cfg(seed, frac, batch_size=32),
                                 'compute': compute_cfg(),
                             }
@@ -217,7 +226,7 @@ def gen_d_series(models: list[str], datasets: list[str],
 
 def gen_fraction_sweep(prefix: str, models: list[str], datasets: list[str],
                        fractions: list[float], horizons: list[int],
-                       text_source: str = 'template') -> int:
+                       text_source: str = 'template', emb_dir: str = None) -> int:
     """Generic fraction sweep generator (used for Tier 1 and Tier 2)."""
     count = 0
     for model_name in models:
@@ -231,6 +240,9 @@ def gen_fraction_sweep(prefix: str, models: list[str], datasets: list[str],
                             f"{prefix}_{model_name.lower()}_{ds_name.lower()}"
                             f"_f{fraction_str(frac)}_h{horizon}_s{seed}"
                         )
+                        data_cfg = {k: v for k, v in ds.items() if k != 'enc_in'}
+                        if emb_dir and text_source != 'random' and model_name in TEXT_MODELS:
+                            data_cfg['text_emb_path'] = _emb_path(emb_dir, ds_name)
                         config = {
                             'name': exp_name,
                             'description': (
@@ -238,7 +250,7 @@ def gen_fraction_sweep(prefix: str, models: list[str], datasets: list[str],
                                 f"fraction={frac} pred={horizon} seed={seed}"
                             ),
                             'model': model_cfg(model_name, ds['enc_in'], 512, horizon, text_source),
-                            'data': {k: v for k, v in ds.items() if k != 'enc_in'},
+                            'data': data_cfg,
                             'training': training_cfg(seed, frac, batch_size=32),
                             'compute': compute_cfg(),
                         }
@@ -287,24 +299,31 @@ def main():
     parser.add_argument('--text_source', default='template',
                         choices=['template', 'llm', 'random'],
                         help='Text source for tier1/tier2 (default: template)')
+    parser.add_argument('--emb_dir', default=None,
+                        help='Directory containing pre-encoded .npy embeddings. '
+                             'If set, text_emb_path is added to all text-model configs. '
+                             'Example: /content/drive/MyDrive/multimodal_TS_research/iteration_2/embeddings')
     args = parser.parse_args()
 
     if args.track == 'd_series':
         models   = args.models   or D_SERIES_MODELS
         datasets = args.datasets or D_SERIES_DATASETS
-        n = gen_d_series(models, datasets, D_SERIES_FRACS, D_SERIES_HORIZONS, D_SERIES_SOURCES)
+        n = gen_d_series(models, datasets, D_SERIES_FRACS, D_SERIES_HORIZONS, D_SERIES_SOURCES,
+                         emb_dir=args.emb_dir)
         print(f'D-series: wrote {n} configs to {OUT_DIR}/')
 
     elif args.track == 'tier1':
         models   = args.models   or ALL_MODELS_TIER1
         datasets = args.datasets or TIER1_DATASETS
-        n = gen_fraction_sweep('t1', models, datasets, TIER1_FRACS, TIER1_HORIZONS, args.text_source)
+        n = gen_fraction_sweep('t1', models, datasets, TIER1_FRACS, TIER1_HORIZONS, args.text_source,
+                               emb_dir=args.emb_dir)
         print(f'Tier 1: wrote {n} configs to {OUT_DIR}/')
 
     elif args.track == 'tier2':
         models   = args.models   or ALL_MODELS_TIER1
         datasets = args.datasets or TIER2_DATASETS
-        n = gen_fraction_sweep('t2', models, datasets, TIER2_FRACS, TIER2_HORIZONS, args.text_source)
+        n = gen_fraction_sweep('t2', models, datasets, TIER2_FRACS, TIER2_HORIZONS, args.text_source,
+                               emb_dir=args.emb_dir)
         print(f'Tier 2: wrote {n} configs to {OUT_DIR}/')
 
 
