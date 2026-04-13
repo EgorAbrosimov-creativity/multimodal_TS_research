@@ -1,0 +1,2648 @@
+[
+  {
+    "name": "dlinear_etth1_pred192_s2024",
+    "model": "DLinear",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth1_pred192_s2024_20260304_182356",
+    "timestamp": "20260304_182356",
+    "metrics": {
+      "mae": 0.5034542083740234,
+      "mse": 0.5170691013336182,
+      "rmse": 0.7190751433372498,
+      "mape": 11.041777610778809,
+      "mspe": 44877.5703125
+    }
+  },
+  {
+    "name": "dlinear_etth1_pred192_s2025",
+    "model": "DLinear",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth1_pred192_s2025_20260304_182441",
+    "timestamp": "20260304_182441",
+    "metrics": {
+      "mae": 0.5293000936508179,
+      "mse": 0.5609474182128906,
+      "rmse": 0.748964250087738,
+      "mape": 10.400806427001953,
+      "mspe": 41892.07421875
+    }
+  },
+  {
+    "name": "dlinear_etth1_pred192_s2026",
+    "model": "DLinear",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth1_pred192_s2026_20260304_182531",
+    "timestamp": "20260304_182531",
+    "metrics": {
+      "mae": 0.5355803370475769,
+      "mse": 0.5679937601089478,
+      "rmse": 0.7536535859107971,
+      "mape": 10.927783012390137,
+      "mspe": 45700.1875
+    }
+  },
+  {
+    "name": "patchtst_etth1_pred192_s2024",
+    "model": "PatchTST",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth1_pred192_s2024_20260304_182555",
+    "timestamp": "20260304_182555",
+    "metrics": {
+      "mae": 0.435533344745636,
+      "mse": 0.4246549606323242,
+      "rmse": 0.6516555547714233,
+      "mape": 9.022414207458496,
+      "mspe": 30097.333984375
+    }
+  },
+  {
+    "name": "patchtst_etth1_pred192_s2025",
+    "model": "PatchTST",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth1_pred192_s2025_20260304_182855",
+    "timestamp": "20260304_182855",
+    "metrics": {
+      "mae": 0.44453608989715576,
+      "mse": 0.43634453415870667,
+      "rmse": 0.6605638265609741,
+      "mape": 10.33776569366455,
+      "mspe": 38919.00390625
+    }
+  },
+  {
+    "name": "patchtst_etth1_pred192_s2026",
+    "model": "PatchTST",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth1_pred192_s2026_20260304_183046",
+    "timestamp": "20260304_183046",
+    "metrics": {
+      "mae": 0.4448407292366028,
+      "mse": 0.43305569887161255,
+      "rmse": 0.6580696702003479,
+      "mape": 9.102331161499023,
+      "mspe": 29869.033203125
+    }
+  },
+  {
+    "name": "bert_forecaster_etth1_pred192_s2024",
+    "model": "BERTForecaster",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth1_pred192_s2024_20260304_183330",
+    "timestamp": "20260304_183330",
+    "metrics": {
+      "mae": 0.7980607151985168,
+      "mse": 1.1122424602508545,
+      "rmse": 1.0546290874481201,
+      "mape": 5.119318008422852,
+      "mspe": 9660.6455078125
+    }
+  },
+  {
+    "name": "bert_forecaster_etth1_pred192_s2025",
+    "model": "BERTForecaster",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth1_pred192_s2025_20260304_183902",
+    "timestamp": "20260304_183902",
+    "metrics": {
+      "mae": 0.7921061515808105,
+      "mse": 1.1331666707992554,
+      "rmse": 1.0645030736923218,
+      "mape": 7.249993801116943,
+      "mspe": 17227.5390625
+    }
+  },
+  {
+    "name": "bert_forecaster_etth1_pred192_s2026",
+    "model": "BERTForecaster",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth1_pred192_s2026_20260304_184419",
+    "timestamp": "20260304_184419",
+    "metrics": {
+      "mae": 0.814803421497345,
+      "mse": 1.2315186262130737,
+      "rmse": 1.1097381114959717,
+      "mape": 14.114102363586426,
+      "mspe": 71843.0859375
+    }
+  },
+  {
+    "name": "late_fusion_etth1_pred192_s2024",
+    "model": "LateFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth1_pred192_s2024_20260304_185019",
+    "timestamp": "20260304_185019",
+    "metrics": {
+      "mae": 0.7334824204444885,
+      "mse": 0.879940927028656,
+      "rmse": 0.9380516409873962,
+      "mape": 16.06893539428711,
+      "mspe": 80372.1796875
+    }
+  },
+  {
+    "name": "late_fusion_etth1_pred192_s2025",
+    "model": "LateFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth1_pred192_s2025_20260304_185818",
+    "timestamp": "20260304_185818",
+    "metrics": {
+      "mae": 0.7519752979278564,
+      "mse": 1.0046977996826172,
+      "rmse": 1.002346158027649,
+      "mape": 12.876741409301758,
+      "mspe": 57456.32421875
+    }
+  },
+  {
+    "name": "late_fusion_etth1_pred192_s2026",
+    "model": "LateFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth1_pred192_s2026_20260304_190620",
+    "timestamp": "20260304_190620",
+    "metrics": {
+      "mae": 0.5859882235527039,
+      "mse": 0.7216921448707581,
+      "rmse": 0.8495246767997742,
+      "mape": 12.09778118133545,
+      "mspe": 49748.49609375
+    }
+  },
+  {
+    "name": "gated_fusion_etth1_pred192_s2024",
+    "model": "GatedFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth1_pred192_s2024_20260304_192320",
+    "timestamp": "20260304_192320",
+    "metrics": {
+      "mae": 0.44004911184310913,
+      "mse": 0.434512197971344,
+      "rmse": 0.6591753959655762,
+      "mape": 12.30101203918457,
+      "mspe": 53703.359375
+    }
+  },
+  {
+    "name": "gated_fusion_etth1_pred192_s2025",
+    "model": "GatedFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth1_pred192_s2025_20260304_193014",
+    "timestamp": "20260304_193014",
+    "metrics": {
+      "mae": 0.44592228531837463,
+      "mse": 0.43218740820884705,
+      "rmse": 0.6574096083641052,
+      "mape": 12.529470443725586,
+      "mspe": 53760.984375
+    }
+  },
+  {
+    "name": "gated_fusion_etth1_pred192_s2026",
+    "model": "GatedFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth1_pred192_s2026_20260304_193812",
+    "timestamp": "20260304_193812",
+    "metrics": {
+      "mae": 0.4438019096851349,
+      "mse": 0.42889711260795593,
+      "rmse": 0.6549023389816284,
+      "mape": 11.593208312988281,
+      "mspe": 48627.671875
+    }
+  },
+  {
+    "name": "film_fusion_etth1_pred192_s2024",
+    "model": "FiLMFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth1_pred192_s2024_20260304_194503",
+    "timestamp": "20260304_194503",
+    "metrics": {
+      "mae": 0.4433026909828186,
+      "mse": 0.4269729554653168,
+      "rmse": 0.6534316539764404,
+      "mape": 12.794108390808105,
+      "mspe": 59615.72265625
+    }
+  },
+  {
+    "name": "film_fusion_etth1_pred192_s2025",
+    "model": "FiLMFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth1_pred192_s2025_20260304_195155",
+    "timestamp": "20260304_195155",
+    "metrics": {
+      "mae": 0.490216463804245,
+      "mse": 0.5171312689781189,
+      "rmse": 0.7191184163093567,
+      "mape": 13.435708045959473,
+      "mspe": 64966.625
+    }
+  },
+  {
+    "name": "film_fusion_etth1_pred192_s2026",
+    "model": "FiLMFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth1_pred192_s2026_20260304_200632",
+    "timestamp": "20260304_200632",
+    "metrics": {
+      "mae": 0.47223520278930664,
+      "mse": 0.4990808963775635,
+      "rmse": 0.7064566016197205,
+      "mape": 10.018338203430176,
+      "mspe": 34437.5859375
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth1_pred192_s2024",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth1_pred192_s2024_20260304_201325",
+    "timestamp": "20260304_201325",
+    "metrics": {
+      "mae": 0.43626669049263,
+      "mse": 0.41664010286331177,
+      "rmse": 0.6454766392707825,
+      "mape": 12.862166404724121,
+      "mspe": 56130.9453125
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth1_pred192_s2025",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth1_pred192_s2025_20260304_202018",
+    "timestamp": "20260304_202018",
+    "metrics": {
+      "mae": 0.430162250995636,
+      "mse": 0.41101202368736267,
+      "rmse": 0.6411021947860718,
+      "mape": 12.193269729614258,
+      "mspe": 52540.68359375
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth1_pred192_s2026",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth1_pred192_s2026_20260304_202712",
+    "timestamp": "20260304_202712",
+    "metrics": {
+      "mae": 0.4491468667984009,
+      "mse": 0.4267784357070923,
+      "rmse": 0.6532828211784363,
+      "mape": 12.661466598510742,
+      "mspe": 54746.8203125
+    }
+  },
+  {
+    "name": "dlinear_etth1_pred336_s2024",
+    "model": "DLinear",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth1_pred336_s2024_20260304_203406",
+    "timestamp": "20260304_203406",
+    "metrics": {
+      "mae": 0.5444543957710266,
+      "mse": 0.5686789751052856,
+      "rmse": 0.7541080713272095,
+      "mape": 9.820832252502441,
+      "mspe": 35592.76171875
+    }
+  },
+  {
+    "name": "dlinear_etth1_pred336_s2025",
+    "model": "DLinear",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth1_pred336_s2025_20260304_203445",
+    "timestamp": "20260304_203445",
+    "metrics": {
+      "mae": 0.5472311973571777,
+      "mse": 0.5758640170097351,
+      "rmse": 0.7588570713996887,
+      "mape": 10.726776123046875,
+      "mspe": 42379.015625
+    }
+  },
+  {
+    "name": "dlinear_etth1_pred336_s2026",
+    "model": "DLinear",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth1_pred336_s2026_20260304_203518",
+    "timestamp": "20260304_203518",
+    "metrics": {
+      "mae": 0.5069883465766907,
+      "mse": 0.5224764943122864,
+      "rmse": 0.7228253483772278,
+      "mape": 9.973040580749512,
+      "mspe": 36093.83203125
+    }
+  },
+  {
+    "name": "patchtst_etth1_pred336_s2024",
+    "model": "PatchTST",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth1_pred336_s2024_20260304_203542",
+    "timestamp": "20260304_203542",
+    "metrics": {
+      "mae": 0.46047505736351013,
+      "mse": 0.4538326561450958,
+      "rmse": 0.6736710071563721,
+      "mape": 10.503828048706055,
+      "mspe": 40668.90234375
+    }
+  },
+  {
+    "name": "patchtst_etth1_pred336_s2025",
+    "model": "PatchTST",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth1_pred336_s2025_20260304_203733",
+    "timestamp": "20260304_203733",
+    "metrics": {
+      "mae": 0.45002058148384094,
+      "mse": 0.44400644302368164,
+      "rmse": 0.6663380861282349,
+      "mape": 11.606886863708496,
+      "mspe": 51537.83984375
+    }
+  },
+  {
+    "name": "patchtst_etth1_pred336_s2026",
+    "model": "PatchTST",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth1_pred336_s2026_20260304_203923",
+    "timestamp": "20260304_203923",
+    "metrics": {
+      "mae": 0.45278140902519226,
+      "mse": 0.44427260756492615,
+      "rmse": 0.6665377616882324,
+      "mape": 11.12375545501709,
+      "mspe": 46993.765625
+    }
+  },
+  {
+    "name": "bert_forecaster_etth1_pred336_s2024",
+    "model": "BERTForecaster",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth1_pred336_s2024_20260304_204113",
+    "timestamp": "20260304_204113",
+    "metrics": {
+      "mae": 0.804978609085083,
+      "mse": 1.1794989109039307,
+      "rmse": 1.0860474109649658,
+      "mape": 12.212196350097656,
+      "mspe": 49916.921875
+    }
+  },
+  {
+    "name": "bert_forecaster_etth1_pred336_s2025",
+    "model": "BERTForecaster",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth1_pred336_s2025_20260304_204612",
+    "timestamp": "20260304_204612",
+    "metrics": {
+      "mae": 0.7932969927787781,
+      "mse": 1.1153169870376587,
+      "rmse": 1.0560857057571411,
+      "mape": 4.973710536956787,
+      "mspe": 5943.3232421875
+    }
+  },
+  {
+    "name": "bert_forecaster_etth1_pred336_s2026",
+    "model": "BERTForecaster",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth1_pred336_s2026_20260304_205112",
+    "timestamp": "20260304_205112",
+    "metrics": {
+      "mae": 0.8273942470550537,
+      "mse": 1.2382460832595825,
+      "rmse": 1.1127650737762451,
+      "mape": 15.481890678405762,
+      "mspe": 86462.8515625
+    }
+  },
+  {
+    "name": "late_fusion_etth1_pred336_s2024",
+    "model": "LateFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth1_pred336_s2024_20260304_205613",
+    "timestamp": "20260304_205613",
+    "metrics": {
+      "mae": 0.7765048146247864,
+      "mse": 0.9909908175468445,
+      "rmse": 0.995485246181488,
+      "mape": 13.758825302124023,
+      "mspe": 66125.609375
+    }
+  },
+  {
+    "name": "late_fusion_etth1_pred336_s2025",
+    "model": "LateFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth1_pred336_s2025_20260304_210403",
+    "timestamp": "20260304_210403",
+    "metrics": {
+      "mae": 0.6760538220405579,
+      "mse": 0.793131947517395,
+      "rmse": 0.8905795812606812,
+      "mape": 11.953995704650879,
+      "mspe": 49498.5546875
+    }
+  },
+  {
+    "name": "late_fusion_etth1_pred336_s2026",
+    "model": "LateFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth1_pred336_s2026_20260304_211153",
+    "timestamp": "20260304_211153",
+    "metrics": {
+      "mae": 0.7782704830169678,
+      "mse": 0.9527150988578796,
+      "rmse": 0.9760712385177612,
+      "mape": 10.7371187210083,
+      "mspe": 34120.3828125
+    }
+  },
+  {
+    "name": "gated_fusion_etth1_pred336_s2024",
+    "model": "GatedFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth1_pred336_s2024_20260304_211837",
+    "timestamp": "20260304_211837",
+    "metrics": {
+      "mae": 0.46979209780693054,
+      "mse": 0.46682360768318176,
+      "rmse": 0.6832448840141296,
+      "mape": 12.999067306518555,
+      "mspe": 63769.125
+    }
+  },
+  {
+    "name": "gated_fusion_etth1_pred336_s2025",
+    "model": "GatedFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth1_pred336_s2025_20260304_212628",
+    "timestamp": "20260304_212628",
+    "metrics": {
+      "mae": 0.46209922432899475,
+      "mse": 0.445977121591568,
+      "rmse": 0.6678152084350586,
+      "mape": 14.68165397644043,
+      "mspe": 78655.8671875
+    }
+  },
+  {
+    "name": "gated_fusion_etth1_pred336_s2026",
+    "model": "GatedFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth1_pred336_s2026_20260304_213419",
+    "timestamp": "20260304_213419",
+    "metrics": {
+      "mae": 0.4647555351257324,
+      "mse": 0.4395923614501953,
+      "rmse": 0.6630176305770874,
+      "mape": 14.638070106506348,
+      "mspe": 76546.4765625
+    }
+  },
+  {
+    "name": "film_fusion_etth1_pred336_s2024",
+    "model": "FiLMFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth1_pred336_s2024_20260304_214102",
+    "timestamp": "20260304_214102",
+    "metrics": {
+      "mae": 0.5082336664199829,
+      "mse": 0.5719708800315857,
+      "rmse": 0.7562875747680664,
+      "mape": 14.869057655334473,
+      "mspe": 81137.7109375
+    }
+  },
+  {
+    "name": "film_fusion_etth1_pred336_s2025",
+    "model": "FiLMFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth1_pred336_s2025_20260304_214747",
+    "timestamp": "20260304_214747",
+    "metrics": {
+      "mae": 0.5158467888832092,
+      "mse": 0.5359763503074646,
+      "rmse": 0.7321040630340576,
+      "mape": 9.878985404968262,
+      "mspe": 32608.615234375
+    }
+  },
+  {
+    "name": "film_fusion_etth1_pred336_s2026",
+    "model": "FiLMFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth1_pred336_s2026_20260304_215432",
+    "timestamp": "20260304_215432",
+    "metrics": {
+      "mae": 0.5067533254623413,
+      "mse": 0.5420339703559875,
+      "rmse": 0.7362295389175415,
+      "mape": 14.536229133605957,
+      "mspe": 78161.984375
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth1_pred336_s2024",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth1_pred336_s2024_20260304_220222",
+    "timestamp": "20260304_220222",
+    "metrics": {
+      "mae": 0.4736194908618927,
+      "mse": 0.4617321193218231,
+      "rmse": 0.6795087456703186,
+      "mape": 15.25855827331543,
+      "mspe": 82166.0546875
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth1_pred336_s2025",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth1_pred336_s2025_20260304_221014",
+    "timestamp": "20260304_221014",
+    "metrics": {
+      "mae": 0.47933530807495117,
+      "mse": 0.47394898533821106,
+      "rmse": 0.6884395480155945,
+      "mape": 13.750807762145996,
+      "mspe": 63777.83984375
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth1_pred336_s2026",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth1_pred336_s2026_20260304_221659",
+    "timestamp": "20260304_221659",
+    "metrics": {
+      "mae": 0.5316838622093201,
+      "mse": 0.571965754032135,
+      "rmse": 0.7562841773033142,
+      "mape": 18.69987678527832,
+      "mspe": 132341.703125
+    }
+  },
+  {
+    "name": "dlinear_etth2_pred192_s2024",
+    "model": "DLinear",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth2_pred192_s2024_20260304_223224",
+    "timestamp": "20260304_223224",
+    "metrics": {
+      "mae": 0.4792443811893463,
+      "mse": 0.482239693403244,
+      "rmse": 0.6944348216056824,
+      "mape": 1.591838002204895,
+      "mspe": 364.22528076171875
+    }
+  },
+  {
+    "name": "dlinear_etth2_pred192_s2025",
+    "model": "DLinear",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth2_pred192_s2025_20260304_223249",
+    "timestamp": "20260304_223249",
+    "metrics": {
+      "mae": 0.5237174034118652,
+      "mse": 0.573701024055481,
+      "rmse": 0.7574305534362793,
+      "mape": 1.6774377822875977,
+      "mspe": 406.0997009277344
+    }
+  },
+  {
+    "name": "dlinear_etth2_pred192_s2026",
+    "model": "DLinear",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth2_pred192_s2026_20260304_223324",
+    "timestamp": "20260304_223324",
+    "metrics": {
+      "mae": 0.4918077886104584,
+      "mse": 0.5027309656143188,
+      "rmse": 0.7090352177619934,
+      "mape": 1.6912415027618408,
+      "mspe": 393.76971435546875
+    }
+  },
+  {
+    "name": "patchtst_etth2_pred192_s2024",
+    "model": "PatchTST",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth2_pred192_s2024_20260304_223411",
+    "timestamp": "20260304_223411",
+    "metrics": {
+      "mae": 0.3984449803829193,
+      "mse": 0.36336877942085266,
+      "rmse": 0.6028007864952087,
+      "mape": 1.5856263637542725,
+      "mspe": 382.1684875488281
+    }
+  },
+  {
+    "name": "patchtst_etth2_pred192_s2025",
+    "model": "PatchTST",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth2_pred192_s2025_20260304_223715",
+    "timestamp": "20260304_223715",
+    "metrics": {
+      "mae": 0.4026922583580017,
+      "mse": 0.3744224011898041,
+      "rmse": 0.6119006276130676,
+      "mape": 1.5717474222183228,
+      "mspe": 382.5094909667969
+    }
+  },
+  {
+    "name": "patchtst_etth2_pred192_s2026",
+    "model": "PatchTST",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth2_pred192_s2026_20260304_224019",
+    "timestamp": "20260304_224019",
+    "metrics": {
+      "mae": 0.39510786533355713,
+      "mse": 0.36586275696754456,
+      "rmse": 0.6048659086227417,
+      "mape": 1.5495609045028687,
+      "mspe": 353.3460388183594
+    }
+  },
+  {
+    "name": "bert_forecaster_etth2_pred192_s2024",
+    "model": "BERTForecaster",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh2, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth2_pred192_s2024_20260304_224246",
+    "timestamp": "20260304_224246",
+    "metrics": {
+      "mae": 1.386202096939087,
+      "mse": 2.9708495140075684,
+      "rmse": 1.723615288734436,
+      "mape": 3.7108609676361084,
+      "mspe": 1224.98974609375
+    }
+  },
+  {
+    "name": "bert_forecaster_etth2_pred192_s2025",
+    "model": "BERTForecaster",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh2, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth2_pred192_s2025_20260304_224753",
+    "timestamp": "20260304_224753",
+    "metrics": {
+      "mae": 1.3601385354995728,
+      "mse": 2.914400100708008,
+      "rmse": 1.7071614265441895,
+      "mape": 3.1312224864959717,
+      "mspe": 875.0448608398438
+    }
+  },
+  {
+    "name": "bert_forecaster_etth2_pred192_s2026",
+    "model": "BERTForecaster",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh2, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth2_pred192_s2026_20260304_225302",
+    "timestamp": "20260304_225302",
+    "metrics": {
+      "mae": 1.3687342405319214,
+      "mse": 2.918538808822632,
+      "rmse": 1.7083731889724731,
+      "mape": 3.3514223098754883,
+      "mspe": 1020.392578125
+    }
+  },
+  {
+    "name": "late_fusion_etth2_pred192_s2024",
+    "model": "LateFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth2_pred192_s2024_20260304_225859",
+    "timestamp": "20260304_225859",
+    "metrics": {
+      "mae": 0.9047998189926147,
+      "mse": 1.36256742477417,
+      "rmse": 1.1672906875610352,
+      "mape": 4.160026550292969,
+      "mspe": 1016.5680541992188
+    }
+  },
+  {
+    "name": "late_fusion_etth2_pred192_s2025",
+    "model": "LateFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth2_pred192_s2025_20260304_231235",
+    "timestamp": "20260304_231235",
+    "metrics": {
+      "mae": 0.8246788382530212,
+      "mse": 1.1324329376220703,
+      "rmse": 1.064158320426941,
+      "mape": 4.231330394744873,
+      "mspe": 1842.775146484375
+    }
+  },
+  {
+    "name": "late_fusion_etth2_pred192_s2026",
+    "model": "LateFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth2_pred192_s2026_20260304_232937",
+    "timestamp": "20260304_232937",
+    "metrics": {
+      "mae": 0.8763763904571533,
+      "mse": 1.3310699462890625,
+      "rmse": 1.1537200212478638,
+      "mape": 3.8395211696624756,
+      "mspe": 1317.0338134765625
+    }
+  },
+  {
+    "name": "gated_fusion_etth2_pred192_s2024",
+    "model": "GatedFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth2_pred192_s2024_20260304_234636",
+    "timestamp": "20260304_234636",
+    "metrics": {
+      "mae": 0.38818246126174927,
+      "mse": 0.3540005683898926,
+      "rmse": 0.594979465007782,
+      "mape": 1.4815335273742676,
+      "mspe": 318.82568359375
+    }
+  },
+  {
+    "name": "gated_fusion_etth2_pred192_s2025",
+    "model": "GatedFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth2_pred192_s2025_20260304_235436",
+    "timestamp": "20260304_235436",
+    "metrics": {
+      "mae": 0.39582014083862305,
+      "mse": 0.35475537180900574,
+      "rmse": 0.595613420009613,
+      "mape": 1.5563582181930542,
+      "mspe": 362.52874755859375
+    }
+  },
+  {
+    "name": "gated_fusion_etth2_pred192_s2026",
+    "model": "GatedFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth2_pred192_s2026_20260305_000129",
+    "timestamp": "20260305_000129",
+    "metrics": {
+      "mae": 0.3916081488132477,
+      "mse": 0.36238378286361694,
+      "rmse": 0.6019831895828247,
+      "mape": 1.4183480739593506,
+      "mspe": 283.5378112792969
+    }
+  },
+  {
+    "name": "film_fusion_etth2_pred192_s2024",
+    "model": "FiLMFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth2_pred192_s2024_20260305_000928",
+    "timestamp": "20260305_000928",
+    "metrics": {
+      "mae": 0.40786492824554443,
+      "mse": 0.38843151926994324,
+      "rmse": 0.6232427358627319,
+      "mape": 1.5293225049972534,
+      "mspe": 321.6413879394531
+    }
+  },
+  {
+    "name": "film_fusion_etth2_pred192_s2025",
+    "model": "FiLMFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth2_pred192_s2025_20260305_001942",
+    "timestamp": "20260305_001942",
+    "metrics": {
+      "mae": 0.42325857281684875,
+      "mse": 0.40296003222465515,
+      "rmse": 0.6347913146018982,
+      "mape": 1.7274903059005737,
+      "mspe": 501.96881103515625
+    }
+  },
+  {
+    "name": "film_fusion_etth2_pred192_s2026",
+    "model": "FiLMFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth2_pred192_s2026_20260305_002741",
+    "timestamp": "20260305_002741",
+    "metrics": {
+      "mae": 0.4320710599422455,
+      "mse": 0.4367544949054718,
+      "rmse": 0.6608740091323853,
+      "mape": 1.638972520828247,
+      "mspe": 417.36126708984375
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth2_pred192_s2024",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth2_pred192_s2024_20260305_004006",
+    "timestamp": "20260305_004006",
+    "metrics": {
+      "mae": 0.3889322876930237,
+      "mse": 0.35059690475463867,
+      "rmse": 0.5921122431755066,
+      "mape": 1.4596562385559082,
+      "mspe": 301.0328369140625
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth2_pred192_s2025",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth2_pred192_s2025_20260305_004804",
+    "timestamp": "20260305_004804",
+    "metrics": {
+      "mae": 0.39711424708366394,
+      "mse": 0.36619237065315247,
+      "rmse": 0.6051383018493652,
+      "mape": 1.5052781105041504,
+      "mspe": 339.3780212402344
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth2_pred192_s2026",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth2_pred192_s2026_20260305_074124",
+    "timestamp": "20260305_074124",
+    "metrics": {
+      "mae": 0.40887343883514404,
+      "mse": 0.36688682436943054,
+      "rmse": 0.605711817741394,
+      "mape": 1.752821683883667,
+      "mspe": 460.6106262207031
+    }
+  },
+  {
+    "name": "dlinear_etth2_pred336_s2024",
+    "model": "DLinear",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth2_pred336_s2024_20260305_074853",
+    "timestamp": "20260305_074853",
+    "metrics": {
+      "mae": 0.5170019268989563,
+      "mse": 0.5394718050956726,
+      "rmse": 0.7344874143600464,
+      "mape": 1.6671489477157593,
+      "mspe": 383.7111511230469
+    }
+  },
+  {
+    "name": "dlinear_etth2_pred336_s2025",
+    "model": "DLinear",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth2_pred336_s2025_20260305_074937",
+    "timestamp": "20260305_074937",
+    "metrics": {
+      "mae": 0.5006588697433472,
+      "mse": 0.5087659358978271,
+      "rmse": 0.7132782936096191,
+      "mape": 1.7200700044631958,
+      "mspe": 433.0170593261719
+    }
+  },
+  {
+    "name": "dlinear_etth2_pred336_s2026",
+    "model": "DLinear",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_etth2_pred336_s2026_20260305_075013",
+    "timestamp": "20260305_075013",
+    "metrics": {
+      "mae": 0.5077916979789734,
+      "mse": 0.5130201578140259,
+      "rmse": 0.7162542343139648,
+      "mape": 1.9101494550704956,
+      "mspe": 563.2642211914062
+    }
+  },
+  {
+    "name": "patchtst_etth2_pred336_s2024",
+    "model": "PatchTST",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth2_pred336_s2024_20260305_075038",
+    "timestamp": "20260305_075038",
+    "metrics": {
+      "mae": 0.4253067672252655,
+      "mse": 0.3965768814086914,
+      "rmse": 0.6297435164451599,
+      "mape": 1.7546501159667969,
+      "mspe": 492.7376403808594
+    }
+  },
+  {
+    "name": "patchtst_etth2_pred336_s2025",
+    "model": "PatchTST",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth2_pred336_s2025_20260305_075328",
+    "timestamp": "20260305_075328",
+    "metrics": {
+      "mae": 0.42437899112701416,
+      "mse": 0.3914613127708435,
+      "rmse": 0.6256687045097351,
+      "mape": 1.8130979537963867,
+      "mspe": 509.9477844238281
+    }
+  },
+  {
+    "name": "patchtst_etth2_pred336_s2026",
+    "model": "PatchTST",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_etth2_pred336_s2026_20260305_075602",
+    "timestamp": "20260305_075602",
+    "metrics": {
+      "mae": 0.4333510100841522,
+      "mse": 0.4058702290058136,
+      "rmse": 0.6370794773101807,
+      "mape": 1.7260338068008423,
+      "mspe": 479.4586181640625
+    }
+  },
+  {
+    "name": "bert_forecaster_etth2_pred336_s2024",
+    "model": "BERTForecaster",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh2, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth2_pred336_s2024_20260305_075930",
+    "timestamp": "20260305_075930",
+    "metrics": {
+      "mae": 1.3166985511779785,
+      "mse": 2.976020336151123,
+      "rmse": 1.7251145839691162,
+      "mape": 1.1762586832046509,
+      "mspe": 15.082850456237793
+    }
+  },
+  {
+    "name": "bert_forecaster_etth2_pred336_s2025",
+    "model": "BERTForecaster",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh2, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth2_pred336_s2025_20260305_080442",
+    "timestamp": "20260305_080442",
+    "metrics": {
+      "mae": 1.326377034187317,
+      "mse": 2.927556037902832,
+      "rmse": 1.711010217666626,
+      "mape": 1.9974476099014282,
+      "mspe": 266.5643310546875
+    }
+  },
+  {
+    "name": "bert_forecaster_etth2_pred336_s2026",
+    "model": "BERTForecaster",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTh2, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_etth2_pred336_s2026_20260305_080954",
+    "timestamp": "20260305_080954",
+    "metrics": {
+      "mae": 1.3272254467010498,
+      "mse": 2.85939621925354,
+      "rmse": 1.6909749507904053,
+      "mape": 2.5793838500976562,
+      "mspe": 488.86529541015625
+    }
+  },
+  {
+    "name": "late_fusion_etth2_pred336_s2024",
+    "model": "LateFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth2_pred336_s2024_20260305_081506",
+    "timestamp": "20260305_081506",
+    "metrics": {
+      "mae": 0.8646740317344666,
+      "mse": 1.2519959211349487,
+      "rmse": 1.1189262866973877,
+      "mape": 4.035221576690674,
+      "mspe": 1613.7198486328125
+    }
+  },
+  {
+    "name": "late_fusion_etth2_pred336_s2025",
+    "model": "LateFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth2_pred336_s2025_20260305_082645",
+    "timestamp": "20260305_082645",
+    "metrics": {
+      "mae": 1.002445936203003,
+      "mse": 1.7847208976745605,
+      "rmse": 1.3359345197677612,
+      "mape": 4.168909072875977,
+      "mspe": 1219.9356689453125
+    }
+  },
+  {
+    "name": "late_fusion_etth2_pred336_s2026",
+    "model": "LateFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_etth2_pred336_s2026_20260305_084407",
+    "timestamp": "20260305_084407",
+    "metrics": {
+      "mae": 0.8940668106079102,
+      "mse": 1.3517802953720093,
+      "rmse": 1.162660837173462,
+      "mape": 4.300320148468018,
+      "mspe": 1762.1549072265625
+    }
+  },
+  {
+    "name": "gated_fusion_etth2_pred336_s2024",
+    "model": "GatedFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth2_pred336_s2024_20260305_090132",
+    "timestamp": "20260305_090132",
+    "metrics": {
+      "mae": 0.4145565927028656,
+      "mse": 0.38336431980133057,
+      "rmse": 0.619164228439331,
+      "mape": 1.6511752605438232,
+      "mspe": 446.6798400878906
+    }
+  },
+  {
+    "name": "gated_fusion_etth2_pred336_s2025",
+    "model": "GatedFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth2_pred336_s2025_20260305_090832",
+    "timestamp": "20260305_090832",
+    "metrics": {
+      "mae": 0.4382660686969757,
+      "mse": 0.4219362735748291,
+      "rmse": 0.6495662331581116,
+      "mape": 1.7962685823440552,
+      "mspe": 536.9617919921875
+    }
+  },
+  {
+    "name": "gated_fusion_etth2_pred336_s2026",
+    "model": "GatedFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_etth2_pred336_s2026_20260305_091532",
+    "timestamp": "20260305_091532",
+    "metrics": {
+      "mae": 0.43349844217300415,
+      "mse": 0.3959400951862335,
+      "rmse": 0.629237711429596,
+      "mape": 1.8606445789337158,
+      "mspe": 548.45947265625
+    }
+  },
+  {
+    "name": "film_fusion_etth2_pred336_s2024",
+    "model": "FiLMFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth2_pred336_s2024_20260305_093034",
+    "timestamp": "20260305_093034",
+    "metrics": {
+      "mae": 0.41098731756210327,
+      "mse": 0.3734111189842224,
+      "rmse": 0.6110737323760986,
+      "mape": 1.6580195426940918,
+      "mspe": 430.95904541015625
+    }
+  },
+  {
+    "name": "film_fusion_etth2_pred336_s2025",
+    "model": "FiLMFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth2_pred336_s2025_20260305_093738",
+    "timestamp": "20260305_093738",
+    "metrics": {
+      "mae": 0.43230339884757996,
+      "mse": 0.40461647510528564,
+      "rmse": 0.6360946893692017,
+      "mape": 1.8483699560165405,
+      "mspe": 515.7926025390625
+    }
+  },
+  {
+    "name": "film_fusion_etth2_pred336_s2026",
+    "model": "FiLMFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_etth2_pred336_s2026_20260305_115306",
+    "timestamp": "20260305_115306",
+    "metrics": {
+      "mae": 0.4335956275463104,
+      "mse": 0.3987172245979309,
+      "rmse": 0.6314405798912048,
+      "mape": 1.9013022184371948,
+      "mspe": 632.3131103515625
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth2_pred336_s2024",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth2_pred336_s2024_20260305_120222",
+    "timestamp": "20260305_120222",
+    "metrics": {
+      "mae": 0.4159427583217621,
+      "mse": 0.38666239380836487,
+      "rmse": 0.6218218207359314,
+      "mape": 1.6124261617660522,
+      "mspe": 362.8134765625
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth2_pred336_s2025",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth2_pred336_s2025_20260305_121002",
+    "timestamp": "20260305_121002",
+    "metrics": {
+      "mae": 0.43015843629837036,
+      "mse": 0.4037446677684784,
+      "rmse": 0.6354090571403503,
+      "mape": 1.7242532968521118,
+      "mspe": 466.43450927734375
+    }
+  },
+  {
+    "name": "ensemble_fusion_etth2_pred336_s2026",
+    "model": "EnsembleFusion",
+    "dataset": "ETTh2",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTh2, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_etth2_pred336_s2026_20260305_121742",
+    "timestamp": "20260305_121742",
+    "metrics": {
+      "mae": 0.41375645995140076,
+      "mse": 0.38460683822631836,
+      "rmse": 0.6201667785644531,
+      "mape": 1.601153016090393,
+      "mspe": 364.1864929199219
+    }
+  },
+  {
+    "name": "dlinear_ettm1_pred192_s2024",
+    "model": "DLinear",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm1_pred192_s2024_20260305_122521",
+    "timestamp": "20260305_122521",
+    "metrics": {
+      "mae": 0.45120152831077576,
+      "mse": 0.4260978400707245,
+      "rmse": 0.652761697769165,
+      "mape": 2.5856449604034424,
+      "mspe": 438.64984130859375
+    }
+  },
+  {
+    "name": "dlinear_ettm1_pred192_s2025",
+    "model": "DLinear",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm1_pred192_s2025_20260305_122819",
+    "timestamp": "20260305_122819",
+    "metrics": {
+      "mae": 0.43303370475769043,
+      "mse": 0.40548980236053467,
+      "rmse": 0.6367807984352112,
+      "mape": 2.343306064605713,
+      "mspe": 374.999755859375
+    }
+  },
+  {
+    "name": "dlinear_ettm1_pred192_s2026",
+    "model": "DLinear",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm1_pred192_s2026_20260305_123207",
+    "timestamp": "20260305_123207",
+    "metrics": {
+      "mae": 0.4483540952205658,
+      "mse": 0.42832356691360474,
+      "rmse": 0.6544643640518188,
+      "mape": 2.795910596847534,
+      "mspe": 506.078125
+    }
+  },
+  {
+    "name": "patchtst_ettm1_pred192_s2024",
+    "model": "PatchTST",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm1_pred192_s2024_20260305_123340",
+    "timestamp": "20260305_123340",
+    "metrics": {
+      "mae": 0.3790550231933594,
+      "mse": 0.34227442741394043,
+      "rmse": 0.5850422382354736,
+      "mape": 2.187671661376953,
+      "mspe": 307.1247253417969
+    }
+  },
+  {
+    "name": "patchtst_ettm1_pred192_s2025",
+    "model": "PatchTST",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm1_pred192_s2025_20260305_124654",
+    "timestamp": "20260305_124654",
+    "metrics": {
+      "mae": 0.3808682858943939,
+      "mse": 0.3419818878173828,
+      "rmse": 0.5847921967506409,
+      "mape": 2.2829372882843018,
+      "mspe": 339.65576171875
+    }
+  },
+  {
+    "name": "patchtst_ettm1_pred192_s2026",
+    "model": "PatchTST",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm1_pred192_s2026_20260305_125842",
+    "timestamp": "20260305_125842",
+    "metrics": {
+      "mae": 0.3854585886001587,
+      "mse": 0.34379467368125916,
+      "rmse": 0.586340069770813,
+      "mape": 2.2726399898529053,
+      "mspe": 344.2240905761719
+    }
+  },
+  {
+    "name": "bert_forecaster_ettm1_pred192_s2024",
+    "model": "BERTForecaster",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTm1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_ettm1_pred192_s2024_20260305_131029",
+    "timestamp": "20260305_131029",
+    "metrics": {
+      "mae": 0.829839289188385,
+      "mse": 1.2741025686264038,
+      "rmse": 1.1287615299224854,
+      "mape": 2.3933377265930176,
+      "mspe": 127.41561126708984
+    }
+  },
+  {
+    "name": "bert_forecaster_ettm1_pred192_s2025",
+    "model": "BERTForecaster",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTm1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_ettm1_pred192_s2025_20260305_135739",
+    "timestamp": "20260305_135739",
+    "metrics": {
+      "mae": 0.8127316832542419,
+      "mse": 1.2796790599822998,
+      "rmse": 1.131229043006897,
+      "mape": 2.1566002368927,
+      "mspe": 64.10096740722656
+    }
+  },
+  {
+    "name": "bert_forecaster_ettm1_pred192_s2026",
+    "model": "BERTForecaster",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTm1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_ettm1_pred192_s2026_20260305_152001",
+    "timestamp": "20260305_152001",
+    "metrics": {
+      "mae": 0.8350589871406555,
+      "mse": 1.4003610610961914,
+      "rmse": 1.1833685636520386,
+      "mape": 2.6069490909576416,
+      "mspe": 182.0065155029297
+    }
+  },
+  {
+    "name": "late_fusion_ettm1_pred192_s2024",
+    "model": "LateFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_ettm1_pred192_s2024_20260305_160121",
+    "timestamp": "20260305_160121",
+    "metrics": {
+      "mae": 0.4434390366077423,
+      "mse": 0.4477163553237915,
+      "rmse": 0.6691160798072815,
+      "mape": 2.625270366668701,
+      "mspe": 507.92230224609375
+    }
+  },
+  {
+    "name": "late_fusion_ettm1_pred192_s2025",
+    "model": "LateFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_ettm1_pred192_s2025_20260305_163710",
+    "timestamp": "20260305_163710",
+    "metrics": {
+      "mae": 0.46983516216278076,
+      "mse": 0.46913617849349976,
+      "rmse": 0.6849351525306702,
+      "mape": 2.296996593475342,
+      "mspe": 385.8674011230469
+    }
+  },
+  {
+    "name": "late_fusion_ettm1_pred192_s2026",
+    "model": "LateFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_ettm1_pred192_s2026_20260305_171255",
+    "timestamp": "20260305_171255",
+    "metrics": {
+      "mae": 0.5063997507095337,
+      "mse": 0.5632466077804565,
+      "rmse": 0.750497579574585,
+      "mape": 3.048403263092041,
+      "mspe": 715.3905029296875
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred192_s2024",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred192_s2024_20260305_182818",
+    "timestamp": "20260305_182818",
+    "metrics": {
+      "mae": 0.389756977558136,
+      "mse": 0.36249861121177673,
+      "rmse": 0.6020785570144653,
+      "mape": 2.290475368499756,
+      "mspe": 379.0794677734375
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred192_s2025",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred192_s2025_20260305_185908",
+    "timestamp": "20260305_185908",
+    "metrics": {
+      "mae": 0.3900291323661804,
+      "mse": 0.36707866191864014,
+      "rmse": 0.6058701872825623,
+      "mape": 2.2755560874938965,
+      "mspe": 336.4055480957031
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred192_s2026",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred192_s2026_20260305_192949",
+    "timestamp": "20260305_192949",
+    "metrics": {
+      "mae": 0.38044822216033936,
+      "mse": 0.35034722089767456,
+      "rmse": 0.5919013619422913,
+      "mape": 2.404093027114868,
+      "mspe": 396.675537109375
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred192_s2024",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred192_s2024_20260305_200030",
+    "timestamp": "20260305_200030",
+    "metrics": {
+      "mae": 0.4080493748188019,
+      "mse": 0.38427460193634033,
+      "rmse": 0.6198988556861877,
+      "mape": 2.395228624343872,
+      "mspe": 329.90093994140625
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred192_s2025",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred192_s2025_20260305_205109",
+    "timestamp": "20260305_205109",
+    "metrics": {
+      "mae": 0.4212338924407959,
+      "mse": 0.4025246202945709,
+      "rmse": 0.6344482898712158,
+      "mape": 2.382934331893921,
+      "mspe": 381.8851623535156
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred192_s2026",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred192_s2026_20260305_212146",
+    "timestamp": "20260305_212146",
+    "metrics": {
+      "mae": 0.405080109834671,
+      "mse": 0.38059109449386597,
+      "rmse": 0.6169206500053406,
+      "mape": 2.2987148761749268,
+      "mspe": 329.0200500488281
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred192_s2024",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred192_s2024_20260305_223054",
+    "timestamp": "20260305_223054",
+    "metrics": {
+      "mae": 0.3931387960910797,
+      "mse": 0.36469292640686035,
+      "rmse": 0.6038981080055237,
+      "mape": 2.2641289234161377,
+      "mspe": 347.5528564453125
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred192_s2025",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred192_s2025_20260305_230149",
+    "timestamp": "20260305_230149",
+    "metrics": {
+      "mae": 0.3978399634361267,
+      "mse": 0.37661251425743103,
+      "rmse": 0.6136876344680786,
+      "mape": 2.0778024196624756,
+      "mspe": 246.0952911376953
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred192_s2026",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred192_s2026_20260305_233308",
+    "timestamp": "20260305_233308",
+    "metrics": {
+      "mae": 0.3905080258846283,
+      "mse": 0.3583572804927826,
+      "rmse": 0.5986294746398926,
+      "mape": 2.4007351398468018,
+      "mspe": 352.0832214355469
+    }
+  },
+  {
+    "name": "dlinear_ettm1_pred336_s2024",
+    "model": "DLinear",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm1_pred336_s2024_20260306_000430",
+    "timestamp": "20260306_000430",
+    "metrics": {
+      "mae": 0.4488919973373413,
+      "mse": 0.4373154938220978,
+      "rmse": 0.6612983345985413,
+      "mape": 2.4658684730529785,
+      "mspe": 412.40020751953125
+    }
+  },
+  {
+    "name": "dlinear_ettm1_pred336_s2025",
+    "model": "DLinear",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm1_pred336_s2025_20260306_000652",
+    "timestamp": "20260306_000652",
+    "metrics": {
+      "mae": 0.44130733609199524,
+      "mse": 0.4236780107021332,
+      "rmse": 0.6509055495262146,
+      "mape": 2.3847267627716064,
+      "mspe": 387.4786071777344
+    }
+  },
+  {
+    "name": "dlinear_ettm1_pred336_s2026",
+    "model": "DLinear",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm1_pred336_s2026_20260306_000914",
+    "timestamp": "20260306_000914",
+    "metrics": {
+      "mae": 0.4404658079147339,
+      "mse": 0.42642614245414734,
+      "rmse": 0.6530131101608276,
+      "mape": 2.4714276790618896,
+      "mspe": 411.5891418457031
+    }
+  },
+  {
+    "name": "patchtst_ettm1_pred336_s2024",
+    "model": "PatchTST",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm1_pred336_s2024_20260306_001303",
+    "timestamp": "20260306_001303",
+    "metrics": {
+      "mae": 0.4001877009868622,
+      "mse": 0.37239527702331543,
+      "rmse": 0.6102420091629028,
+      "mape": 2.2814271450042725,
+      "mspe": 324.9414367675781
+    }
+  },
+  {
+    "name": "patchtst_ettm1_pred336_s2025",
+    "model": "PatchTST",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm1_pred336_s2025_20260306_002422",
+    "timestamp": "20260306_002422",
+    "metrics": {
+      "mae": 0.398323655128479,
+      "mse": 0.37767890095710754,
+      "rmse": 0.614555835723877,
+      "mape": 2.2316946983337402,
+      "mspe": 305.1610412597656
+    }
+  },
+  {
+    "name": "patchtst_ettm1_pred336_s2026",
+    "model": "PatchTST",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm1_pred336_s2026_20260306_003540",
+    "timestamp": "20260306_003540",
+    "metrics": {
+      "mae": 0.4036174714565277,
+      "mse": 0.3758765757083893,
+      "rmse": 0.6130877137184143,
+      "mape": 2.241978645324707,
+      "mspe": 331.982666015625
+    }
+  },
+  {
+    "name": "bert_forecaster_ettm1_pred336_s2024",
+    "model": "BERTForecaster",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTm1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_ettm1_pred336_s2024_20260306_004534",
+    "timestamp": "20260306_004534",
+    "metrics": {
+      "mae": 0.7956008315086365,
+      "mse": 1.10642409324646,
+      "rmse": 1.0518670082092285,
+      "mape": 1.0736922025680542,
+      "mspe": 2.2750136852264404
+    }
+  },
+  {
+    "name": "bert_forecaster_ettm1_pred336_s2025",
+    "model": "BERTForecaster",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTm1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_ettm1_pred336_s2025_20260306_010838",
+    "timestamp": "20260306_010838",
+    "metrics": {
+      "mae": 0.7975037693977356,
+      "mse": 1.2076815366744995,
+      "rmse": 1.0989456176757812,
+      "mape": 1.7615845203399658,
+      "mspe": 35.37162780761719
+    }
+  },
+  {
+    "name": "bert_forecaster_ettm1_pred336_s2026",
+    "model": "BERTForecaster",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Text-only BERT forecaster on ETTm1, pred_len=96 (GPU required)",
+    "result_dir": "experiments/results/bert_forecaster_ettm1_pred336_s2026_20260306_064214",
+    "timestamp": "20260306_064214",
+    "metrics": {
+      "mae": 0.7955749034881592,
+      "mse": 1.1056194305419922,
+      "rmse": 1.0514843463897705,
+      "mape": 1.051904559135437,
+      "mspe": 1.4367462396621704
+    }
+  },
+  {
+    "name": "late_fusion_ettm1_pred336_s2024",
+    "model": "LateFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_ettm1_pred336_s2024_20260306_073228",
+    "timestamp": "20260306_073228",
+    "metrics": {
+      "mae": 0.5891836285591125,
+      "mse": 0.6337572336196899,
+      "rmse": 0.796088695526123,
+      "mape": 2.896695375442505,
+      "mspe": 527.2959594726562
+    }
+  },
+  {
+    "name": "late_fusion_ettm1_pred336_s2025",
+    "model": "LateFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_ettm1_pred336_s2025_20260306_080015",
+    "timestamp": "20260306_080015",
+    "metrics": {
+      "mae": 0.5251175165176392,
+      "mse": 0.5660755038261414,
+      "rmse": 0.7523798942565918,
+      "mape": 2.7472426891326904,
+      "mspe": 537.2885131835938
+    }
+  },
+  {
+    "name": "late_fusion_ettm1_pred336_s2026",
+    "model": "LateFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Late Fusion (PatchTST + BERT text branch) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/late_fusion_ettm1_pred336_s2026_20260306_082806",
+    "timestamp": "20260306_082806",
+    "metrics": {
+      "mae": 0.4990595281124115,
+      "mse": 0.49250108003616333,
+      "rmse": 0.7017841935157776,
+      "mape": 2.2991373538970947,
+      "mspe": 301.2726745605469
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred336_s2024",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred336_s2024_20260306_090027",
+    "timestamp": "20260306_090027",
+    "metrics": {
+      "mae": 0.4024249315261841,
+      "mse": 0.3831418752670288,
+      "rmse": 0.618984580039978,
+      "mape": 2.2779111862182617,
+      "mspe": 336.80828857421875
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred336_s2024",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred336_s2024_20260306_090951",
+    "timestamp": "20260306_090951",
+    "metrics": {
+      "mae": 0.4024249315261841,
+      "mse": 0.3831418752670288,
+      "rmse": 0.618984580039978,
+      "mape": 2.2779111862182617,
+      "mspe": 336.80828857421875
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred336_s2025",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred336_s2025_20260306_094547",
+    "timestamp": "20260306_094547",
+    "metrics": {
+      "mae": 0.40206849575042725,
+      "mse": 0.3759797215461731,
+      "rmse": 0.6131718754768372,
+      "mape": 2.4182186126708984,
+      "mspe": 366.5113220214844
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred336_s2025",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred336_s2025_20260306_100452",
+    "timestamp": "20260306_100452",
+    "metrics": {
+      "mae": 0.40206849575042725,
+      "mse": 0.3759797215461731,
+      "rmse": 0.6131718754768372,
+      "mape": 2.4182186126708984,
+      "mspe": 366.5113220214844
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred336_s2026",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred336_s2026_20260306_104032",
+    "timestamp": "20260306_104032",
+    "metrics": {
+      "mae": 0.42417123913764954,
+      "mse": 0.40905341506004333,
+      "rmse": 0.6395728588104248,
+      "mape": 2.608041524887085,
+      "mspe": 423.64111328125
+    }
+  },
+  {
+    "name": "gated_fusion_ettm1_pred336_s2026",
+    "model": "GatedFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Gated Fusion (text gates PatchTST encoder features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/gated_fusion_ettm1_pred336_s2026_20260306_105917",
+    "timestamp": "20260306_105917",
+    "metrics": {
+      "mae": 0.42417123913764954,
+      "mse": 0.40905341506004333,
+      "rmse": 0.6395728588104248,
+      "mape": 2.608041524887085,
+      "mspe": 423.64111328125
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred336_s2024",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred336_s2024_20260306_114359",
+    "timestamp": "20260306_114359",
+    "metrics": {
+      "mae": 0.4229916036128998,
+      "mse": 0.41085606813430786,
+      "rmse": 0.6409805417060852,
+      "mape": 2.569061756134033,
+      "mspe": 395.7129821777344
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred336_s2024",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred336_s2024_20260306_120250",
+    "timestamp": "20260306_120250",
+    "metrics": {
+      "mae": 0.4229916036128998,
+      "mse": 0.41085606813430786,
+      "rmse": 0.6409805417060852,
+      "mape": 2.569061756134033,
+      "mspe": 395.7129821777344
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred336_s2025",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred336_s2025_20260306_123834",
+    "timestamp": "20260306_123834",
+    "metrics": {
+      "mae": 0.44183558225631714,
+      "mse": 0.4286004602909088,
+      "rmse": 0.6546758413314819,
+      "mape": 2.331974983215332,
+      "mspe": 328.8222351074219
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred336_s2025",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred336_s2025_20260306_125730",
+    "timestamp": "20260306_125730",
+    "metrics": {
+      "mae": 0.44183558225631714,
+      "mse": 0.4286004602909088,
+      "rmse": 0.6546758413314819,
+      "mape": 2.331974983215332,
+      "mspe": 328.8222351074219
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred336_s2026",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred336_s2026_20260306_133317",
+    "timestamp": "20260306_133317",
+    "metrics": {
+      "mae": 0.4168168902397156,
+      "mse": 0.40024614334106445,
+      "rmse": 0.6326500773429871,
+      "mape": 2.4538567066192627,
+      "mspe": 390.5849609375
+    }
+  },
+  {
+    "name": "film_fusion_ettm1_pred336_s2026",
+    "model": "FiLMFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "FiLM Fusion (text generates gamma/beta for PatchTST features) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/film_fusion_ettm1_pred336_s2026_20260306_135205",
+    "timestamp": "20260306_135205",
+    "metrics": {
+      "mae": 0.4168168902397156,
+      "mse": 0.40024614334106445,
+      "rmse": 0.6326500773429871,
+      "mape": 2.4538567066192627,
+      "mspe": 390.5849609375
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred336_s2024",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred336_s2024_20260306_142751",
+    "timestamp": "20260306_142751",
+    "metrics": {
+      "mae": 0.4110299348831177,
+      "mse": 0.38884517550468445,
+      "rmse": 0.6235744953155518,
+      "mape": 2.303004503250122,
+      "mspe": 307.746337890625
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred336_s2024",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred336_s2024_20260306_144644",
+    "timestamp": "20260306_144644",
+    "metrics": {
+      "mae": 0.4110299348831177,
+      "mse": 0.38884517550468445,
+      "rmse": 0.6235744953155518,
+      "mape": 2.303004503250122,
+      "mspe": 307.746337890625
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred336_s2025",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred336_s2025_20260306_152228",
+    "timestamp": "20260306_152228",
+    "metrics": {
+      "mae": 0.3996124565601349,
+      "mse": 0.37798598408699036,
+      "rmse": 0.6148056387901306,
+      "mape": 2.2543327808380127,
+      "mspe": 337.564208984375
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred336_s2025",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred336_s2025_20260306_154113",
+    "timestamp": "20260306_154113",
+    "metrics": {
+      "mae": 0.3996124565601349,
+      "mse": 0.37798598408699036,
+      "rmse": 0.6148056387901306,
+      "mape": 2.2543327808380127,
+      "mspe": 337.564208984375
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred336_s2026",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred336_s2026_20260306_161705",
+    "timestamp": "20260306_161705",
+    "metrics": {
+      "mae": 0.4139626920223236,
+      "mse": 0.4056726098060608,
+      "rmse": 0.6369243264198303,
+      "mape": 2.4459891319274902,
+      "mspe": 429.19097900390625
+    }
+  },
+  {
+    "name": "dlinear_ettm2_pred192_s2024",
+    "model": "DLinear",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm2_pred192_s2024_20260306_171148",
+    "timestamp": "20260306_171148",
+    "metrics": {
+      "mae": 0.37035688757896423,
+      "mse": 0.30066072940826416,
+      "rmse": 0.5483253598213196,
+      "mape": 1.3605469465255737,
+      "mspe": 274.7633361816406
+    }
+  },
+  {
+    "name": "dlinear_ettm2_pred192_s2025",
+    "model": "DLinear",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm2_pred192_s2025_20260306_171420",
+    "timestamp": "20260306_171420",
+    "metrics": {
+      "mae": 0.3612147867679596,
+      "mse": 0.2929631173610687,
+      "rmse": 0.5412606596946716,
+      "mape": 1.327840805053711,
+      "mspe": 265.66900634765625
+    }
+  },
+  {
+    "name": "dlinear_ettm2_pred192_s2026",
+    "model": "DLinear",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm2_pred192_s2026_20260306_171709",
+    "timestamp": "20260306_171709",
+    "metrics": {
+      "mae": 0.38817957043647766,
+      "mse": 0.33229702711105347,
+      "rmse": 0.5764520764350891,
+      "mape": 1.4564287662506104,
+      "mspe": 329.7916564941406
+    }
+  },
+  {
+    "name": "ensemble_fusion_ettm1_pred336_s2026",
+    "model": "EnsembleFusion",
+    "dataset": "ETTm1",
+    "pred_len": 336,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "Ensemble Fusion (text-predicted \u03b1 blends PatchTST + text MLP) on ETTm1, pred_len=96",
+    "result_dir": "experiments/results/ensemble_fusion_ettm1_pred336_s2026_20260306_163552",
+    "timestamp": "20260306_163552",
+    "metrics": {
+      "mae": 0.4139626920223236,
+      "mse": 0.4056726098060608,
+      "rmse": 0.6369243264198303,
+      "mape": 2.4459891319274902,
+      "mspe": 429.19097900390625
+    }
+  },
+  {
+    "name": "dlinear_ettm2_pred192_s2024",
+    "model": "DLinear",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm2_pred192_s2024_20260306_172555",
+    "timestamp": "20260306_172555",
+    "metrics": {
+      "mae": 0.37035688757896423,
+      "mse": 0.30066072940826416,
+      "rmse": 0.5483253598213196,
+      "mape": 1.3605469465255737,
+      "mspe": 274.7633361816406
+    }
+  },
+  {
+    "name": "patchtst_ettm2_pred192_s2024",
+    "model": "PatchTST",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm2_pred192_s2024_20260306_172024",
+    "timestamp": "20260306_172024",
+    "metrics": {
+      "mae": 0.30293941497802734,
+      "mse": 0.22997339069843292,
+      "rmse": 0.4795553982257843,
+      "mape": 1.1728490591049194,
+      "mspe": 211.5756378173828
+    }
+  },
+  {
+    "name": "dlinear_ettm2_pred192_s2025",
+    "model": "DLinear",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm2_pred192_s2025_20260306_172828",
+    "timestamp": "20260306_172828",
+    "metrics": {
+      "mae": 0.3612147867679596,
+      "mse": 0.2929631173610687,
+      "rmse": 0.5412606596946716,
+      "mape": 1.327840805053711,
+      "mspe": 265.66900634765625
+    }
+  },
+  {
+    "name": "dlinear_ettm2_pred192_s2026",
+    "model": "DLinear",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "DLinear baseline on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/dlinear_ettm2_pred192_s2026_20260306_173127",
+    "timestamp": "20260306_173127",
+    "metrics": {
+      "mae": 0.38817957043647766,
+      "mse": 0.33229702711105347,
+      "rmse": 0.5764520764350891,
+      "mape": 1.4564287662506104,
+      "mspe": 329.7916564941406
+    }
+  },
+  {
+    "name": "patchtst_ettm2_pred192_s2025",
+    "model": "PatchTST",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm2_pred192_s2025_20260306_173119",
+    "timestamp": "20260306_173119",
+    "metrics": {
+      "mae": 0.3056465983390808,
+      "mse": 0.23403991758823395,
+      "rmse": 0.483776718378067,
+      "mape": 1.1584903001785278,
+      "mspe": 205.78372192382812
+    }
+  },
+  {
+    "name": "patchtst_ettm2_pred192_s2024",
+    "model": "PatchTST",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm2_pred192_s2024_20260306_173452",
+    "timestamp": "20260306_173452",
+    "metrics": {
+      "mae": 0.30293941497802734,
+      "mse": 0.22997339069843292,
+      "rmse": 0.4795553982257843,
+      "mape": 1.1728490591049194,
+      "mspe": 211.5756378173828
+    }
+  },
+  {
+    "name": "patchtst_ettm2_pred192_s2026",
+    "model": "PatchTST",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm2_pred192_s2026_20260306_174405",
+    "timestamp": "20260306_174405",
+    "metrics": {
+      "mae": 0.30097082257270813,
+      "mse": 0.2288641780614853,
+      "rmse": 0.47839751839637756,
+      "mape": 1.1450202465057373,
+      "mspe": 199.85980224609375
+    }
+  },
+  {
+    "name": "patchtst_ettm2_pred192_s2025",
+    "model": "PatchTST",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm2_pred192_s2025_20260306_175030",
+    "timestamp": "20260306_175030",
+    "metrics": {
+      "mae": 0.3056465983390808,
+      "mse": 0.23403991758823395,
+      "rmse": 0.483776718378067,
+      "mape": 1.1584903001785278,
+      "mspe": 205.78372192382812
+    }
+  },
+  {
+    "name": "patchtst_ettm2_pred192_s2026",
+    "model": "PatchTST",
+    "dataset": "ETTm2",
+    "pred_len": 192,
+    "seq_len": 512,
+    "train_fraction": 1.0,
+    "description": "PatchTST backbone on ETTm2, pred_len=96",
+    "result_dir": "experiments/results/patchtst_ettm2_pred192_s2026_20260306_180535",
+    "timestamp": "20260306_180535",
+    "metrics": {
+      "mae": 0.30097082257270813,
+      "mse": 0.2288641780614853,
+      "rmse": 0.47839751839637756,
+      "mape": 1.1450202465057373,
+      "mspe": 199.85980224609375
+    }
+  }
+]

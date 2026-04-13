@@ -4,7 +4,7 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 from sklearn.preprocessing import StandardScaler
-from utils.timefeatures import time_features
+from utils.data.timefeatures import time_features
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -13,7 +13,8 @@ warnings.filterwarnings('ignore')
 class Dataset_ETT_hour(Dataset):
     def __init__(self, root_path, flag='train', size=None,
                  features='M', data_path='ETTh1.csv',
-                 target='OT', scale=True, timeenc=1, freq='h'):
+                 target='OT', scale=True, timeenc=1, freq='h',
+                 text_emb_path=None):
         self.seq_len, self.label_len, self.pred_len = size
         assert flag in ['train', 'val', 'test']
         self.set_type = {'train': 0, 'val': 1, 'test': 2}[flag]
@@ -25,6 +26,7 @@ class Dataset_ETT_hour(Dataset):
         self.freq = freq
         self.root_path = root_path
         self.data_path = data_path
+        self.text_embs = np.load(text_emb_path) if text_emb_path else None
         self.__read_data__()
 
     def __read_data__(self):
@@ -74,12 +76,15 @@ class Dataset_ETT_hour(Dataset):
         r_begin = s_end - self.label_len
         r_end = r_begin + self.label_len + self.pred_len
 
-        return (
+        item = (
             self.data_x[s_begin:s_end],
             self.data_y[r_begin:r_end],
             self.data_stamp[s_begin:s_end],
             self.data_stamp[r_begin:r_end],
         )
+        if self.text_embs is not None:
+            return item + (self.text_embs[s_begin],)
+        return item
 
     def __len__(self):
         return len(self.data_x) - self.seq_len - self.pred_len + 1
@@ -91,7 +96,8 @@ class Dataset_ETT_hour(Dataset):
 class Dataset_ETT_minute(Dataset):
     def __init__(self, root_path, flag='train', size=None,
                  features='M', data_path='ETTm1.csv',
-                 target='OT', scale=True, timeenc=1, freq='t'):
+                 target='OT', scale=True, timeenc=1, freq='t',
+                 text_emb_path=None):
         self.seq_len, self.label_len, self.pred_len = size
         assert flag in ['train', 'val', 'test']
         self.set_type = {'train': 0, 'val': 1, 'test': 2}[flag]
@@ -103,6 +109,7 @@ class Dataset_ETT_minute(Dataset):
         self.freq = freq
         self.root_path = root_path
         self.data_path = data_path
+        self.text_embs = np.load(text_emb_path) if text_emb_path else None
         self.__read_data__()
 
     def __read_data__(self):
@@ -153,12 +160,15 @@ class Dataset_ETT_minute(Dataset):
         r_begin = s_end - self.label_len
         r_end = r_begin + self.label_len + self.pred_len
 
-        return (
+        item = (
             self.data_x[s_begin:s_end],
             self.data_y[r_begin:r_end],
             self.data_stamp[s_begin:s_end],
             self.data_stamp[r_begin:r_end],
         )
+        if self.text_embs is not None:
+            return item + (self.text_embs[s_begin],)
+        return item
 
     def __len__(self):
         return len(self.data_x) - self.seq_len - self.pred_len + 1
@@ -172,7 +182,8 @@ class Dataset_Custom(Dataset):
 
     def __init__(self, root_path, flag='train', size=None,
                  features='M', data_path='data.csv',
-                 target='OT', scale=True, timeenc=1, freq='h'):
+                 target='OT', scale=True, timeenc=1, freq='h',
+                 text_emb_path=None):
         self.seq_len, self.label_len, self.pred_len = size
         assert flag in ['train', 'val', 'test']
         self.set_type = {'train': 0, 'val': 1, 'test': 2}[flag]
@@ -184,6 +195,7 @@ class Dataset_Custom(Dataset):
         self.freq = freq
         self.root_path = root_path
         self.data_path = data_path
+        self.text_embs = np.load(text_emb_path) if text_emb_path else None
         self.__read_data__()
 
     def __read_data__(self):
@@ -234,12 +246,15 @@ class Dataset_Custom(Dataset):
         r_begin = s_end - self.label_len
         r_end = r_begin + self.label_len + self.pred_len
 
-        return (
+        item = (
             self.data_x[s_begin:s_end],
             self.data_y[r_begin:r_end],
             self.data_stamp[s_begin:s_end],
             self.data_stamp[r_begin:r_end],
         )
+        if self.text_embs is not None:
+            return item + (self.text_embs[s_begin],)
+        return item
 
     def __len__(self):
         return len(self.data_x) - self.seq_len - self.pred_len + 1

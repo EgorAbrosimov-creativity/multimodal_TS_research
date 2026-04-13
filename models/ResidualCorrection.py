@@ -33,17 +33,28 @@ class FlattenHead(nn.Module):
 
 class Model(nn.Module):
     """
-    Ensemble Fusion: one TS branch (PatchTST) + one text branch (frozen LM MLP).
-    The text embedding predicts a scalar interpolation weight α ∈ (0, 1) per sample:
+    F10 — Residual Text Correction.
 
-        ts_out   = PatchTST(x_enc)              [B, pred_len, enc_in]
-        text_emb = LM(generate_prompt(x_enc))   [B, text_hidden]
-        text_out = MLP(text_emb)                [B, pred_len, enc_in]
-        α        = sigmoid(Linear(text_emb))    [B, 1, 1]
-        out      = α · ts_out + (1-α) · text_out
+    Structural fix for the LateFusion failure mode: text is prevented from
+    overriding the TS signal by design. A PatchTST produces the primary forecast;
+    the text branch produces a bounded correction scaled by a learned per-channel
+    scalar β, initialized near zero.
 
-    The TS branch uses instance normalization; text_out is predicted in
-    normalized space so α learns a meaningful trade-off between the two branches.
+    Pipeline:
+        ts_out          = PatchTST(x_enc)         [B, pred_len, enc_in]
+        text_correction = MLP(text_emb)            [B, pred_len * enc_in]
+        output          = ts_out + β * text_correction
+
+    β is a per-channel learnable parameter (shape [enc_in]), initialized to 0.01
+    so the model starts as standard PatchTST. Gradient only pushes β away from
+    zero when the text correction genuinely reduces the loss.
+
+    Key diagnostic: track β magnitude across training fractions. If β → 0 at all
+    fractions, text provides no useful correction. If β grows at low fractions,
+    text compensates for reduced TS signal — directly supporting the graceful
+    degradation hypothesis.
+
+    self.last_beta is set to β.detach() each forward pass for diagnostics.
     """
 
     def __init__(self, configs, patch_len=16, stride=8):
@@ -55,7 +66,7 @@ class Model(nn.Module):
 
         padding = stride
 
-        # ── TS branch (PatchTST backbone) ────────────────────────────────
+        # ── PatchTST backbone (primary forecast) ──────────────────────────
         self.patch_embedding = PatchEmbedding(
             configs.d_model, patch_len, stride, padding, configs.dropout)
         self.encoder = Encoder(
@@ -78,25 +89,26 @@ class Model(nn.Module):
         self.ts_head = FlattenHead(configs.enc_in, head_nf, configs.pred_len,
                                    head_dropout=configs.dropout)
 
-        # ── Text branch ───────────────────────────────────────────────────
+        # ── Text encoder ──────────────────────────────────────────────────
         text_model  = getattr(configs, 'text_model', 'sentence-transformers/all-MiniLM-L6-v2')
         text_source = getattr(configs, 'text_source', 'template')
         self.text_encoder = TextEncoder(
             model_name=text_model, random_mode=(text_source == 'random'))
         text_hidden = self.text_encoder.hidden_dim
 
-        self.text_head = nn.Sequential(
+        # ── Text correction MLP ───────────────────────────────────────────
+        self.correction_mlp = nn.Sequential(
             nn.Linear(text_hidden, text_hidden // 2),
             nn.ReLU(),
             nn.Dropout(configs.dropout),
             nn.Linear(text_hidden // 2, configs.pred_len * configs.enc_in),
         )
 
-        # ── Interpolation weight: text predicts how much to trust text vs TS ─
-        self.alpha_proj = nn.Linear(text_hidden, 1)
+        # ── β: per-channel correction scale, initialized near 0 ──────────
+        self.beta = nn.Parameter(0.01 * torch.ones(configs.enc_in))
 
-        # Diagnostic: last mean α over batch (set during forward, read during test)
-        self.last_alpha = None
+        # Diagnostic
+        self.last_beta = None
 
     def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, mask=None, text_emb=None):
         B = x_enc.size(0)
@@ -107,29 +119,28 @@ class Model(nn.Module):
         stdev = torch.sqrt(torch.var(x, dim=1, keepdim=True, unbiased=False) + 1e-5)
         x = x / stdev
 
-        # ── TS branch ────────────────────────────────────────────────────
-        x_p = x.permute(0, 2, 1)                              # [B, n_vars, T]
-        enc_out, n_vars = self.patch_embedding(x_p)           # [B*n_vars, patch_num, d_model]
-        enc_out, _ = self.encoder(enc_out)                    # [B*n_vars, patch_num, d_model]
+        # ── Primary TS forecast ───────────────────────────────────────────
+        x_p = x.permute(0, 2, 1)                               # [B, n_vars, T]
+        enc_out, n_vars = self.patch_embedding(x_p)            # [B*n_vars, patch_num, d_model]
+        enc_out, _ = self.encoder(enc_out)
         patch_num = enc_out.shape[1]
-        enc_out = enc_out.reshape(B, n_vars, patch_num, -1)   # [B, n_vars, patch_num, d_model]
-        enc_out = enc_out.permute(0, 1, 3, 2)                 # [B, n_vars, d_model, patch_num]
-        ts_out = self.ts_head(enc_out).permute(0, 2, 1)       # [B, pred_len, n_vars]
+        enc_out = enc_out.reshape(B, n_vars, patch_num, -1)
+        enc_out = enc_out.permute(0, 1, 3, 2)                  # [B, n_vars, d_model, patch_num]
+        ts_out = self.ts_head(enc_out).permute(0, 2, 1)        # [B, pred_len, n_vars]
 
-        # ── Text branch ───────────────────────────────────────────────────
+        # ── De-normalize TS output ────────────────────────────────────────
+        ts_out = ts_out * stdev[:, 0, :].unsqueeze(1).expand_as(ts_out)
+        ts_out = ts_out + means[:, 0, :].unsqueeze(1).expand_as(ts_out)
+
+        # ── Text correction ───────────────────────────────────────────────
         if text_emb is None:
             texts = generate_ts_description(x_enc, self.dataset_name, self.pred_len, x_mark_enc)
-            text_emb = self.text_encoder(texts)               # [B, text_hidden]
-        text_out = self.text_head(text_emb)                   # [B, pred_len * enc_in]
-        text_out = text_out.view(B, self.pred_len, self.enc_in)
+            text_emb = self.text_encoder(texts)                # [B, text_hidden]
 
-        # ── Interpolation ─────────────────────────────────────────────────
-        alpha = torch.sigmoid(self.alpha_proj(text_emb))      # [B, 1]
-        self.last_alpha = alpha.detach()                       # [B, 1] — for diagnostics
-        alpha = alpha.unsqueeze(2)                             # [B, 1, 1] → broadcast
-        out = alpha * ts_out + (1.0 - alpha) * text_out       # [B, pred_len, enc_in]
+        correction = self.correction_mlp(text_emb)             # [B, pred_len * enc_in]
+        correction = correction.view(B, self.pred_len, self.enc_in)
 
-        # ── De-normalization ──────────────────────────────────────────────
-        out = out * stdev[:, 0, :].unsqueeze(1).expand_as(out)
-        out = out + means[:, 0, :].unsqueeze(1).expand_as(out)
+        # β [enc_in] broadcast over [B, pred_len, enc_in]
+        self.last_beta = self.beta.detach()                    # for diagnostics
+        out = ts_out + self.beta * correction
         return out

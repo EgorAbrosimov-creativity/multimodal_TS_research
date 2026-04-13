@@ -1,7 +1,7 @@
 import math
 import torch
 import torch.nn as nn
-from data_provider.data_factory import data_provider
+from utils.data_provider.data_factory import data_provider
 
 
 
