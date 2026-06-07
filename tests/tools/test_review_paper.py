@@ -204,5 +204,7 @@ async def test_run_review_creates_all_output_files(tmp_path):
         )
 
     assert (out_dir / "synthesis.md").exists()
-    existing = list(out_dir.glob("*.md"))
-    assert len(existing) == 5  # 4 specialists + synthesis
+    for filename in ("scientific.md", "rhetoric.md", "proofread.md", "ai_detection.md"):
+        assert (out_dir / filename).exists(), f"Missing {filename}"
+        content = (out_dir / filename).read_text()
+        assert not content.startswith("# ERROR"), f"{filename} contains an error stub"

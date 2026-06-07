@@ -1,6 +1,7 @@
 import asyncio
 import argparse
 import os
+import sys
 from datetime import date
 from pathlib import Path
 
@@ -316,6 +317,11 @@ async def run_review(
         else:
             reports[agent_name] = result  # type: ignore[assignment]
 
+    if not reports:
+        print(f"[✗] All specialist agents failed. Check error stubs in {out_dir}")
+        return out_dir
+
+    print(f"Specialist reports written to: {out_dir}")
     print("\nRunning Orchestrator...")
     await run_orchestrator(client, reports, out_dir)
     return out_dir
@@ -328,7 +334,11 @@ def main() -> None:
     parser.add_argument("--springer-pdf", type=Path, default=SPRINGER_PDF_PATH,
                         help="Path to Springer author instructions PDF")
     args = parser.parse_args()
-    asyncio.run(run_review(args.paper, args.out, args.springer_pdf))
+    try:
+        asyncio.run(run_review(args.paper, args.out, args.springer_pdf))
+    except Exception as exc:
+        print(f"[✗] Review failed: {exc}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
