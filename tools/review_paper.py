@@ -253,6 +253,8 @@ async def run_orchestrator(
     reports: dict[str, str],
     out_dir: Path,
 ) -> None:
+    if not reports:
+        raise ValueError("reports must not be empty")
     reports_text = "\n\n---\n\n".join(
         f"# {name} Report\n\n{text}" for name, text in reports.items()
     )
