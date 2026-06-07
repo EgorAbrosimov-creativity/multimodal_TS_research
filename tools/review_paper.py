@@ -275,3 +275,61 @@ async def run_orchestrator(
     out_path = out_dir / "synthesis.md"
     out_path.write_text(synthesis, encoding="utf-8")
     print(f"[✓] Orchestrator done → {out_path}")
+
+
+async def run_review(
+    paper_path: Path = DEFAULT_PAPER,
+    out_base: Path = DEFAULT_OUT,
+    springer_path: Path = SPRINGER_PDF_PATH,
+) -> Path:
+    api_key = load_api_key()
+    client = anthropic.AsyncAnthropic(api_key=api_key)
+
+    print("Extracting paper text...")
+    paper_text = extract_docx_text(paper_path)
+
+    print("Extracting Springer instructions...")
+    try:
+        springer_text = extract_pdf_text(springer_path)
+    except Exception as e:
+        print(f"[!] Could not read Springer PDF: {e}. Proofreader runs without compliance context.")
+        springer_text = ""
+
+    out_dir = out_base / str(date.today())
+    out_dir.mkdir(parents=True, exist_ok=True)
+    print(f"Output directory: {out_dir}\n")
+
+    print("Running specialist reviewers in parallel...")
+    tasks = [
+        run_agent(client, key, paper_text, springer_text, out_dir)
+        for key in AGENTS
+    ]
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    reports: dict[str, str] = {}
+    for key, result in zip(AGENTS.keys(), results):
+        agent_name = AGENTS[key]["name"]
+        if isinstance(result, Exception):
+            print(f"[✗] {agent_name} failed: {result}")
+            error_path = out_dir / AGENTS[key]["filename"]
+            error_path.write_text(f"# ERROR\n\nAgent failed: {result}\n", encoding="utf-8")
+        else:
+            reports[agent_name] = result  # type: ignore[assignment]
+
+    print("\nRunning Orchestrator...")
+    await run_orchestrator(client, reports, out_dir)
+    return out_dir
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Run BMAD-style paper review workflow")
+    parser.add_argument("--paper", type=Path, default=DEFAULT_PAPER, help="Path to paper_draft.docx")
+    parser.add_argument("--out", type=Path, default=DEFAULT_OUT, help="Base output directory")
+    parser.add_argument("--springer-pdf", type=Path, default=SPRINGER_PDF_PATH,
+                        help="Path to Springer author instructions PDF")
+    args = parser.parse_args()
+    asyncio.run(run_review(args.paper, args.out, args.springer_pdf))
+
+
+if __name__ == "__main__":
+    main()

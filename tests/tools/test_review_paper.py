@@ -151,3 +151,58 @@ async def test_run_orchestrator_includes_all_reports_in_prompt(tmp_path):
     user_content = call_kwargs["messages"][0]["content"]
     assert "unique-sci-text" in user_content
     assert "unique-proof-text" in user_content
+
+
+@pytest.mark.asyncio
+async def test_run_review_creates_all_output_files(tmp_path):
+    from tools.review_paper import run_review
+
+    # Create a minimal docx
+    doc = docx_lib.Document()
+    doc.add_heading("Introduction", level=1)
+    doc.add_paragraph("Some paper content here.")
+    paper_path = tmp_path / "paper.docx"
+    doc.save(str(paper_path))
+
+    # Mock api key
+    key_path = tmp_path / "api_key.txt"
+    key_path.write_text("sk-fake-key")
+
+    def make_mock_message(text):
+        msg = MagicMock()
+        mock_content = MagicMock()
+        mock_content.type = "text"
+        mock_content.text = text
+        msg.content = [mock_content]
+        return msg
+
+    call_count = 0
+
+    async def fake_create(**kwargs):
+        nonlocal call_count
+        call_count += 1
+        # First 4 calls = specialists, 5th = orchestrator
+        if call_count <= 4:
+            system = kwargs.get("system", "")
+            name = "ScientificReviewer" if "NeurIPS" in system else \
+                   "RhetoricReviewer" if "rhetoric" in system.lower() else \
+                   "Proofreader" if "copy editor" in system.lower() else \
+                   "AIDetectionReviewer"
+            return make_mock_message(f"# {name} Review\n\n## Summary\nTest.")
+        return make_mock_message("# Paper Review Synthesis\n\n## Overall Assessment\nOK.")
+
+    mock_client = MagicMock()
+    mock_client.messages.create = AsyncMock(side_effect=fake_create)
+
+    with patch("tools.review_paper.API_KEY_PATH", key_path), \
+         patch("tools.review_paper.anthropic.AsyncAnthropic", return_value=mock_client), \
+         patch("tools.review_paper.SPRINGER_PDF_PATH", tmp_path / "missing.pdf"):
+
+        out_dir = await run_review(
+            paper_path=paper_path,
+            out_base=tmp_path / "review",
+        )
+
+    assert (out_dir / "synthesis.md").exists()
+    existing = list(out_dir.glob("*.md"))
+    assert len(existing) == 5  # 4 specialists + synthesis
