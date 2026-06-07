@@ -104,3 +104,50 @@ async def test_run_agent_scientific_does_not_send_springer_text(tmp_path):
     call_kwargs = mock_client.messages.create.call_args.kwargs
     user_content = call_kwargs["messages"][0]["content"]
     assert "springer instructions" not in user_content
+
+
+@pytest.mark.asyncio
+async def test_run_orchestrator_writes_synthesis(tmp_path):
+    from tools.review_paper import run_orchestrator
+
+    mock_client = MagicMock()
+    mock_message = MagicMock()
+    mock_content = MagicMock()
+    mock_content.type = "text"
+    mock_content.text = "# Paper Review Synthesis\n\n## Overall Assessment\nReady to submit."
+    mock_message.content = [mock_content]
+    mock_client.messages.create = AsyncMock(return_value=mock_message)
+
+    reports = {
+        "ScientificReviewer": "sci report text",
+        "RhetoricReviewer": "rhetoric report text",
+    }
+    await run_orchestrator(mock_client, reports, tmp_path)
+
+    synthesis_path = tmp_path / "synthesis.md"
+    assert synthesis_path.exists()
+    assert "Synthesis" in synthesis_path.read_text()
+
+
+@pytest.mark.asyncio
+async def test_run_orchestrator_includes_all_reports_in_prompt(tmp_path):
+    from tools.review_paper import run_orchestrator
+
+    mock_client = MagicMock()
+    mock_message = MagicMock()
+    mock_content = MagicMock()
+    mock_content.type = "text"
+    mock_content.text = "# Paper Review Synthesis\n\nDone."
+    mock_message.content = [mock_content]
+    mock_client.messages.create = AsyncMock(return_value=mock_message)
+
+    reports = {
+        "ScientificReviewer": "unique-sci-text",
+        "Proofreader": "unique-proof-text",
+    }
+    await run_orchestrator(mock_client, reports, tmp_path)
+
+    call_kwargs = mock_client.messages.create.call_args.kwargs
+    user_content = call_kwargs["messages"][0]["content"]
+    assert "unique-sci-text" in user_content
+    assert "unique-proof-text" in user_content

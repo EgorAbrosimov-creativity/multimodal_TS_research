@@ -246,3 +246,30 @@ async def run_agent(
     out_path.write_text(report, encoding="utf-8")
     print(f"[✓] {agent['name']} done → {out_path}")
     return report
+
+
+async def run_orchestrator(
+    client: anthropic.AsyncAnthropic,
+    reports: dict[str, str],
+    out_dir: Path,
+) -> None:
+    reports_text = "\n\n---\n\n".join(
+        f"# {name} Report\n\n{text}" for name, text in reports.items()
+    )
+    try:
+        message = await client.messages.create(
+            model=MODEL,
+            max_tokens=4096,
+            system=ORCHESTRATOR_SYSTEM,
+            messages=[{"role": "user", "content": f"<reports>\n{reports_text}\n</reports>"}],
+        )
+    except anthropic.APIError as exc:
+        raise RuntimeError(f"[Orchestrator] API error: {exc}") from exc
+    if not message.content or message.content[0].type != "text":
+        raise RuntimeError(
+            f"[Orchestrator] Unexpected API response: content={message.content!r}"
+        )
+    synthesis = message.content[0].text
+    out_path = out_dir / "synthesis.md"
+    out_path.write_text(synthesis, encoding="utf-8")
+    print(f"[✓] Orchestrator done → {out_path}")
