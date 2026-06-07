@@ -47,5 +47,5 @@ def test_extract_docx_text_nonexistent_raises(tmp_path):
 
 def test_extract_pdf_text_nonexistent_raises(tmp_path):
     from tools.review_paper import extract_pdf_text
-    with pytest.raises(Exception):
+    with pytest.raises(FileNotFoundError):
         extract_pdf_text(tmp_path / "missing.pdf")

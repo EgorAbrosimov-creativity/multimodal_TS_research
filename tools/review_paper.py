@@ -1,5 +1,6 @@
 import asyncio
 import argparse
+import os
 from datetime import date
 from pathlib import Path
 
@@ -17,6 +18,8 @@ TODAY = str(date.today())
 
 
 def load_api_key() -> str:
+    if env_key := os.environ.get("ANTHROPIC_API_KEY"):
+        return env_key
     return API_KEY_PATH.read_text().strip()
 
 
@@ -32,6 +35,12 @@ def extract_docx_text(path: Path) -> str:
             lines.append(f"\n{'#' * level} {para.text}\n")
         else:
             lines.append(para.text)
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for para in cell.paragraphs:
+                    if para.text.strip():
+                        lines.append(para.text)
     return "\n".join(lines)
 
 
