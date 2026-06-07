@@ -78,7 +78,7 @@ def _report_fmt(name: str) -> str:
 
 AGENTS: dict[str, dict] = {
     "scientific": {
-        "name": "ScientificReviewer",
+        "name": (_n := "ScientificReviewer"),
         "filename": "scientific.md",
         "needs_springer": False,
         "system": (
@@ -96,10 +96,10 @@ AGENTS: dict[str, dict] = {
             "fragility) is adequately evidenced by the described diagnostics\n"
             "- Check experimental protocol completeness: seeds reported, train/val/test splits "
             "defined, metrics specified, datasets described\n\n"
-        ) + _report_fmt("ScientificReviewer"),
+        ) + _report_fmt(_n),
     },
     "rhetoric": {
-        "name": "RhetoricReviewer",
+        "name": (_n := "RhetoricReviewer"),
         "filename": "rhetoric.md",
         "needs_springer": False,
         "system": (
@@ -117,10 +117,10 @@ AGENTS: dict[str, dict] = {
             "- Whether §8 Practitioner Guide follows naturally from §6–7 results\n"
             "- Whether the revised framing ('which fusion mechanisms can exploit text') is "
             "consistently maintained throughout\n\n"
-        ) + _report_fmt("RhetoricReviewer"),
+        ) + _report_fmt(_n),
     },
     "proofread": {
-        "name": "Proofreader",
+        "name": (_n := "Proofreader"),
         "filename": "proofread.md",
         "needs_springer": True,
         "system": (
@@ -148,10 +148,10 @@ AGENTS: dict[str, dict] = {
             "- ORCID identifiers in header\n"
             "- Full paper target: 12–15 pages\n\n"
             "For each issue quote the original text and give the corrected version.\n\n"
-        ) + _report_fmt("Proofreader"),
+        ) + _report_fmt(_n),
     },
     "ai_detection": {
-        "name": "AIDetectionReviewer",
+        "name": (_n := "AIDetectionReviewer"),
         "filename": "ai_detection.md",
         "needs_springer": False,
         "system": (
@@ -177,7 +177,7 @@ AGENTS: dict[str, dict] = {
             "3. Explain in one sentence what makes it sound AI-generated\n"
             "4. Propose a specific, natural rewrite\n\n"
             "Do not flag standard technical or genuinely appropriate academic phrasing.\n\n"
-        ) + _report_fmt("AIDetectionReviewer"),
+        ) + _report_fmt(_n),
     },
 }
 
@@ -194,8 +194,8 @@ ORCHESTRATOR_SYSTEM = (
     "   - Major: strongly recommended before submission\n"
     "   - Minor: polish (typos, minor phrasing, small inconsistencies)\n"
     "4. Produce a single ranked action list\n\n"
-    f"Output this exact format:\n\n"
-    f"# Paper Review Synthesis\n"
+    "Output this exact format:\n\n"
+    "# Paper Review Synthesis\n"
     f"*Generated: {TODAY}*\n\n"
     "## Overall Assessment\n"
     "(One paragraph: paper's readiness for submission, strongest areas, most urgent gaps)\n\n"
