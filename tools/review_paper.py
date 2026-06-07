@@ -217,18 +217,30 @@ async def run_agent(
     springer_text: str,
     out_dir: Path,
 ) -> str:
+    if agent_key not in AGENTS:
+        raise ValueError(
+            f"Unknown agent_key {agent_key!r}. Valid keys: {list(AGENTS)}"
+        )
     agent = AGENTS[agent_key]
     user_content = f"<paper>\n{paper_text}\n</paper>"
     if agent["needs_springer"]:
         user_content += f"\n\n<springer_instructions>\n{springer_text}\n</springer_instructions>"
     user_content += f"\n\nToday's date: {TODAY}"
 
-    message = await client.messages.create(
-        model=MODEL,
-        max_tokens=4096,
-        system=agent["system"],
-        messages=[{"role": "user", "content": user_content}],
-    )
+    try:
+        message = await client.messages.create(
+            model=MODEL,
+            max_tokens=4096,
+            system=agent["system"],
+            messages=[{"role": "user", "content": user_content}],
+        )
+    except anthropic.APIError as exc:
+        raise RuntimeError(f"[{agent['name']}] API error: {exc}") from exc
+    if not message.content or message.content[0].type != "text":
+        raise RuntimeError(
+            f"[{agent['name']}] Unexpected API response: "
+            f"content={message.content!r}"
+        )
     report = message.content[0].text
     out_path = out_dir / agent["filename"]
     out_path.write_text(report, encoding="utf-8")
