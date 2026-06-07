@@ -57,7 +57,9 @@ async def test_run_agent_writes_report_to_file(tmp_path):
 
     mock_client = MagicMock()
     mock_message = MagicMock()
-    mock_message.content = [MagicMock(text="# ScientificReviewer Review\n\n## Summary\nSolid.")]
+    mock_content = MagicMock(text="# ScientificReviewer Review\n\n## Summary\nSolid.")
+    mock_content.type = "text"
+    mock_message.content = [mock_content]
     mock_client.messages.create = AsyncMock(return_value=mock_message)
 
     result = await run_agent(mock_client, "scientific", "paper text here", "", tmp_path)
@@ -74,7 +76,9 @@ async def test_run_agent_proofreader_sends_springer_text(tmp_path):
 
     mock_client = MagicMock()
     mock_message = MagicMock()
-    mock_message.content = [MagicMock(text="# Proofreader Review\n\n## Summary\nOK.")]
+    mock_content = MagicMock(text="# Proofreader Review\n\n## Summary\nOK.")
+    mock_content.type = "text"
+    mock_message.content = [mock_content]
     mock_client.messages.create = AsyncMock(return_value=mock_message)
 
     await run_agent(mock_client, "proofread", "paper text", "springer instructions", tmp_path)
@@ -90,7 +94,9 @@ async def test_run_agent_scientific_does_not_send_springer_text(tmp_path):
 
     mock_client = MagicMock()
     mock_message = MagicMock()
-    mock_message.content = [MagicMock(text="# ScientificReviewer Review\n\n## Summary\nOK.")]
+    mock_content = MagicMock(text="# ScientificReviewer Review\n\n## Summary\nOK.")
+    mock_content.type = "text"
+    mock_message.content = [mock_content]
     mock_client.messages.create = AsyncMock(return_value=mock_message)
 
     await run_agent(mock_client, "scientific", "paper text", "springer instructions", tmp_path)
