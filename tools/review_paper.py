@@ -208,3 +208,29 @@ ORCHESTRATOR_SYSTEM = (
     "## Duplicate findings resolved\n"
     "(Brief note on findings that appeared in multiple reports and how they were merged)\n"
 )
+
+
+async def run_agent(
+    client: anthropic.AsyncAnthropic,
+    agent_key: str,
+    paper_text: str,
+    springer_text: str,
+    out_dir: Path,
+) -> str:
+    agent = AGENTS[agent_key]
+    user_content = f"<paper>\n{paper_text}\n</paper>"
+    if agent["needs_springer"]:
+        user_content += f"\n\n<springer_instructions>\n{springer_text}\n</springer_instructions>"
+    user_content += f"\n\nToday's date: {TODAY}"
+
+    message = await client.messages.create(
+        model=MODEL,
+        max_tokens=4096,
+        system=agent["system"],
+        messages=[{"role": "user", "content": user_content}],
+    )
+    report = message.content[0].text
+    out_path = out_dir / agent["filename"]
+    out_path.write_text(report, encoding="utf-8")
+    print(f"[✓] {agent['name']} done → {out_path}")
+    return report

@@ -49,3 +49,52 @@ def test_extract_pdf_text_nonexistent_raises(tmp_path):
     from tools.review_paper import extract_pdf_text
     with pytest.raises(FileNotFoundError):
         extract_pdf_text(tmp_path / "missing.pdf")
+
+
+@pytest.mark.asyncio
+async def test_run_agent_writes_report_to_file(tmp_path):
+    from tools.review_paper import run_agent
+
+    mock_client = MagicMock()
+    mock_message = MagicMock()
+    mock_message.content = [MagicMock(text="# ScientificReviewer Review\n\n## Summary\nSolid.")]
+    mock_client.messages.create = AsyncMock(return_value=mock_message)
+
+    result = await run_agent(mock_client, "scientific", "paper text here", "", tmp_path)
+
+    assert "ScientificReviewer" in result
+    report_path = tmp_path / "scientific.md"
+    assert report_path.exists()
+    assert report_path.read_text() == result
+
+
+@pytest.mark.asyncio
+async def test_run_agent_proofreader_sends_springer_text(tmp_path):
+    from tools.review_paper import run_agent
+
+    mock_client = MagicMock()
+    mock_message = MagicMock()
+    mock_message.content = [MagicMock(text="# Proofreader Review\n\n## Summary\nOK.")]
+    mock_client.messages.create = AsyncMock(return_value=mock_message)
+
+    await run_agent(mock_client, "proofread", "paper text", "springer instructions", tmp_path)
+
+    call_kwargs = mock_client.messages.create.call_args.kwargs
+    user_content = call_kwargs["messages"][0]["content"]
+    assert "springer instructions" in user_content
+
+
+@pytest.mark.asyncio
+async def test_run_agent_scientific_does_not_send_springer_text(tmp_path):
+    from tools.review_paper import run_agent
+
+    mock_client = MagicMock()
+    mock_message = MagicMock()
+    mock_message.content = [MagicMock(text="# ScientificReviewer Review\n\n## Summary\nOK.")]
+    mock_client.messages.create = AsyncMock(return_value=mock_message)
+
+    await run_agent(mock_client, "scientific", "paper text", "springer instructions", tmp_path)
+
+    call_kwargs = mock_client.messages.create.call_args.kwargs
+    user_content = call_kwargs["messages"][0]["content"]
+    assert "springer instructions" not in user_content
