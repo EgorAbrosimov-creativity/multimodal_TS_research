@@ -1,94 +1,98 @@
-# Multimodal Time-Series Forecasting
+# Text-Augmented Time Series Forecasting
 
-Research codebase comparing TS-only baselines against text-augmented fusion models on time-series forecasting benchmarks.
+Research codebase for the study: **do text-augmented fusion models degrade more gracefully than TS-only baselines as training data shrinks, and does the choice of fusion mechanism determine that robustness?**
 
----
-
-## Overview
-
-Text descriptions are generated **automatically** from each input window's statistics (min, max, median, trend direction). No external text data is required. BERT encodes these descriptions; the resulting embeddings are fused with time-series features in different ways to test whether textual summaries help forecasting.
+Grounding paper: Time-VLM (Zhong et al., arXiv:2502.04395, ICML 2025). Scope here is narrower — text + time series only, no vision.
 
 ---
 
-## Model Lineup
+## Key Findings
 
-| # | Model | Type | GPU needed |
-|---|-------|------|-----------|
-| 1 | **DLinear** | TS-only baseline | No (CPU ok) |
-| 2 | **PatchTST** ⭐ | TS-only backbone | Recommended |
-| 3 | **BERTForecaster** | Text-only (ablation) | Yes — Colab |
-| 4 | **LateFusion** | Concat TS + text outputs → MLP | Yes — Colab |
-| 5 | **GatedFusion** ⭐ | Text gates TS encoder features | Yes — Colab |
-| 6 | **FiLMFusion** ⭐ | Text generates γ, β for TS features | Yes — Colab |
+Across 700+ experiments (5 datasets, 5 training fractions, 2 horizons, 7 architectures):
+
+- Fusion models do **not** uniformly outperform PatchTST under data scarcity.
+- The two most graceful fusion models (EnsembleFusion, GatedFusion) achieve that graceful degradation by **suppressing the text signal entirely** — not by exploiting it.
+- FiLMFusion is the only standard fusion model that demonstrably uses text (∼7% MSE gap over random embeddings), yet it is the **least robust** at short horizons — affine modulation parameters overfit rapidly under scarcity.
+- CrossAttentionFusion and ResidualCorrection (fixed architectures) show genuine graceful degradation (ratio 1.10–1.29) closely tracking PatchTST.
+- Template-generated descriptions match LLM-generated text (Phi-4-mini, 4-bit) in forecasting accuracy at zero inference cost.
+- DLinear collapses catastrophically at 5% training data (ratio ≈ 6×); PatchTST is the correct TS-only comparator for fusion models.
+
+**Revised framing:** the appropriate question is not which fusion models degrade least, but which fusion mechanisms can *exploit* text under data scarcity — currently none do so reliably.
+
+---
+
+## Model Stack
+
+| ID | Model | Type | Text? | Status |
+|----|-------|------|-------|--------|
+| 01 | DLinear | TS-only baseline | No | Active |
+| 02 | PatchTST | TS-only backbone | No | Active |
+| 03 | BERTForecaster | Text-only ablation | Yes | Non-viable standalone |
+| 05 | GatedFusion | Feature-level gating | Yes | Active — suppresses text (gate near-uniform) |
+| 06 | FiLMFusion | Feature-level FiLM modulation | Yes | Active — best semantic sensitivity; overfits at low data |
+| 07 | EnsembleFusion | Output-level weighted avg | Yes | Active — graceful via α-collapse, not text use |
+| F8 | CrossAttentionFusion | Patch-level cross-attention | Yes | Fixed (N=4 token projection) — validated |
+| F10 | ResidualCorrection | Residual text correction | Yes | Fixed (β init 0.1) — validated |
+
+LateFusion (04) deprecated — structurally unstable.
+
+---
+
+## Experiment Summary
+
+| Iteration | Runs | Scope | Key outcome |
+|-----------|------|-------|-------------|
+| 1 | ~50 | ETTh1, 100% data, models 01–07 | Baseline fusion comparison; LateFusion deprecated |
+| 2 | 762 | All Tier 1 datasets (ETTh1/h2/m1), all fractions, seeds | Data-scarcity sweep; α-collapse and gate suppression identified |
+| 3 | 468 | D1 text ablation + Tier 2 (Weather, ExchangeRate) + F8/F10 validation | Template wins; cross-dataset consistency confirmed; F8/F10 fixed |
+
+---
+
+## Evaluation Protocol
+
+- **Tier 1 datasets:** ETTh1, ETTh2, ETTm1
+- **Tier 2 datasets:** Weather, ExchangeRate
+- **Horizons:** `pred_len ∈ {96, 336}`
+- **Training fractions:** 100% → 50% → 25% → 10% → 5% (most recent X% of train split)
+- **Seeds:** 3 per experiment (2024, 2025, 2026); 1 for BERTForecaster
+- **Metrics:** MSE + MAE (mean ± std across seeds)
+- **Text source:** `template` (locked after Iter 3 ablation)
+
+---
+
+## Text Encoding Pipeline
+
+Text descriptions are generated offline per window, encoded once with `microsoft/MiniLM-L6-H384-uncased` (22M params, dim 384), and saved as `.npy` files. No LLM inference at training time.
+
+Description template:
+```
+[REGIME] trend (slope=[X]). Volatility std=[X]. Dominant cycle: [X] steps.
+Last value [X], recent change [X]. Autocorr lag-1=[X], lag-24=[X].
+Recorded [DAY] at [HOUR]:00.
+```
+
+Pre-encoded embeddings live in `embeddings/{source}/{dataset}_{split}_minilm.npy`.
 
 ---
 
 ## Project Structure
 
 ```
-multimodality/
-├── run_experiment.py          # main entry point
-├── compare_results.py         # compare results across experiments
-├── requirements.txt
-│
-├── models/
-│   ├── DLinear.py             # existing baseline
-│   ├── PatchTST.py            # existing backbone
-│   ├── BERTForecaster.py      # text-only model
-│   ├── LateFusion.py          # output-level fusion
-│   ├── GatedFusion.py         # feature-level gating
-│   └── FiLMFusion.py          # feature-level FiLM modulation
-│
-├── layers/
-│   ├── TextEncoder.py         # text generation + frozen BERT wrapper
-│   └── ...                    # existing layers
-│
-├── exp/
-│   ├── exp_basic.py           # base experiment class
-│   └── exp_forecasting.py     # training / validation / test loop
-│
-├── data_provider/
-│   ├── data_loader.py         # Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom
-│   └── data_factory.py        # data_provider(config, flag) factory
-│
-├── dataset/
-│   ├── ETT-small/             # ETTh1.csv, ETTh2.csv, ETTm1.csv, ETTm2.csv
-│   ├── electricity/
-│   ├── weather/
-│   └── ...
-│
-└── experiments/
-    ├── registry.json          # auto-updated index of all runs
-    ├── configs/               # one YAML file per experiment
-    │   ├── 01_dlinear_etth1.yaml
-    │   ├── 02_patchtst_etth1.yaml
-    │   ├── 03_bert_forecaster_etth1.yaml
-    │   ├── 04_late_fusion_etth1.yaml
-    │   ├── 05_gated_fusion_etth1.yaml
-    │   └── 06_film_fusion_etth1.yaml
-    └── results/               # auto-created, one folder per run
-        └── {name}_{timestamp}/
-            ├── config.yaml    # exact config used
-            ├── metrics.json   # mae, mse, rmse, mape, mspe
-            ├── checkpoint.pth # best model weights
-            ├── preds.npy
-            └── trues.npy
-```
-
----
-
-## Datasets
-
-Datasets are not included in this repo. Download them from the [TimeVLM repository](https://github.com/CityMind-Lab/ICML25-TimeVLM/tree/main/src/TimeVLM) and place them under `dataset/`:
-
-```
-dataset/
-├── ETT-small/      # ETTh1.csv, ETTh2.csv, ETTm1.csv, ETTm2.csv
-├── electricity/
-├── traffic/
-├── weather/
-├── illness/
-└── exchange_rate/
+models/          — model implementations (DLinear, PatchTST, fusion models)
+layers/          — reusable layers (TextEncoder, CrossAttention, etc.)
+exp/             — experiment runners (exp_basic.py, exp_forecasting.py)
+utils/
+  data_provider/ — data loading and factory
+  text/          — encode_descriptions (offline embedding pre-computation)
+  experiment/    — generate_configs (YAML config grid generator)
+  eval/          — metrics
+  training/      — losses, EarlyStopping, LR schedule
+embeddings/      — pre-encoded MiniLM embeddings (template/, llm/)
+dataset/         — ETT-small, weather, exchange_rate, electricity, traffic
+results/         — iteration registries (JSON + parquet)
+figures/         — analysis figures
+run_experiment.py          — main entry point
+iteration3_analysis.ipynb  — full results analysis (all 3 iterations)
 ```
 
 ---
@@ -99,81 +103,47 @@ dataset/
 pip install -r requirements.txt
 ```
 
-BERT-based models (configs 03–06) require a GPU. Connect a Colab GPU runtime via the VSCode extension, then run commands as normal.
+Tested on MacBook Pro M5 Pro (24GB, MPS backend) and Google Colab T4.
 
 ---
 
-## Running Experiments
+## Datasets
+
+Not included. Download from the [Time-VLM repository](https://github.com/CityMind-Lab/ICML25-TimeVLM/tree/main/src/TimeVLM) and place under `dataset/`:
+
+```
+dataset/
+├── ETT-small/      # ETTh1.csv, ETTh2.csv, ETTm1.csv, ETTm2.csv
+├── weather/
+├── exchange_rate/
+├── electricity/
+├── traffic/
+└── illness/
+```
+
+---
+
+## Running an Experiment
 
 ```bash
-# Run a single experiment
-python run_experiment.py --config experiments/configs/02_patchtst_etth1.yaml
+# Single run
+python run_experiment.py --config path/to/config.yaml
 
-# Override config values without editing the YAML
-python run_experiment.py --config experiments/configs/02_patchtst_etth1.yaml \
-    --name patchtst_lr_sweep \
-    --set training.learning_rate=0.001 training.train_epochs=10
+# Generate a config grid (e.g. Iter 3 d-series)
+python utils/experiment/generate_configs.py --track d_series --models filmfusion gatedfusion
 
-# Compare all completed experiments
-python compare_results.py
-
-# Filter and sort
-python compare_results.py --filter model=PatchTST
-python compare_results.py --filter dataset=ETTh1 --sort mse
+# Compare results
+python compare_results.py --filter model=FiLMFusion --sort mse
 ```
 
 ---
 
-## Adding a New Experiment
+## Data Truncation Convention
 
-1. Copy an existing YAML from `experiments/configs/` and edit it.
-2. Set `name`, `model.name`, `data.*`, and `training.*` as needed.
-3. Run `python run_experiment.py --config experiments/configs/your_config.yaml`.
+Training fractions take the **most recent X%** of the train split (adjacent to the val boundary):
 
-Results land in `experiments/results/{name}_{timestamp}/` and are added to `experiments/registry.json` automatically.
-
----
-
-## Adding a New Model
-
-1. Create `models/YourModel.py` with a `Model(configs)` class.
-   - `configs` is a `SimpleNamespace` with all YAML keys flattened (e.g. `configs.seq_len`, `configs.d_model`).
-   - Implement `forward(x_enc, x_mark_enc, x_dec, x_mark_dec)` → `[B, pred_len, enc_in]`.
-2. If your model uses BERT, import `TextEncoder` and `generate_ts_description` from `layers/TextEncoder.py`, and add your model name to `BERT_MODELS` in that file.
-3. Create a YAML config referencing `model.name: YourModel`.
-
----
-
-## Text Generation
-
-Statistical descriptions are generated per sample inside each fusion model's `forward()`:
-
+```python
+start_idx = int(n_train * (1 - fraction))
+train_subset = train_data[start_idx:]   # correct
+# train_data[:int(n_train * fraction)]  # wrong — maximises temporal gap to test
 ```
-"Dataset: ETTh1. Task: forecast the next 96 steps from the past 336 steps.
- Input statistics: min=-1.243, max=2.107, median=0.412, overall trend is upward."
-```
-
-This happens automatically — the data pipeline is unchanged for all models.
-
----
-
-## Architecture Details
-
-### GatedFusion
-Text embedding generates a soft gate `σ(W · text_emb)` ∈ [0,1]^{d_model}, applied element-wise to PatchTST encoder features before the prediction head. The gate learns which feature dimensions the text description is most informative about.
-
-### FiLMFusion
-Text embedding predicts affine parameters (γ, β) via two linear layers. These modulate PatchTST encoder features as `γ ⊙ enc_out + β` (Feature-wise Linear Modulation). Unlike gating, FiLM can both scale and shift features.
-
----
-
-## Dataset Splits
-
-ETT datasets use the standard literature splits (same as TimeVLM / PatchTST papers):
-
-| Dataset | Train | Val | Test |
-|---------|-------|-----|------|
-| ETTh1/h2 | 12 months | 4 months | 4 months |
-| ETTm1/m2 | 12 months | 4 months | 4 months |
-
-Custom datasets use a 70 / 10 / 20 split.
