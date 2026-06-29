@@ -105,7 +105,7 @@ class Model(nn.Module):
         )
 
         # ── β: per-channel correction scale, initialized near 0 ──────────
-        self.beta = nn.Parameter(0.01 * torch.ones(configs.enc_in))
+        self.beta = nn.Parameter(0.1 * torch.ones(configs.enc_in))
 
         # Diagnostic
         self.last_beta = None

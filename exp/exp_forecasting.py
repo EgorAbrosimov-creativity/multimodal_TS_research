@@ -192,6 +192,31 @@ class Exp_Forecasting(Exp_Basic):
                 attn = np.stack(attn_vals).mean(0)   # [num_patches, n_text_tokens]
                 diag['attn_mean'] = float(attn.mean())
                 diag['attn_per_patch'] = attn.mean(-1).tolist()
+
+            # 3C — pairwise cosine similarity of text embeddings
+            # Samples 200 random windows from test set and computes mean pairwise
+            # cosine similarity. Mean > 0.95 → descriptions near-identical → text
+            # signal is noise (explains text-resistance on datasets like ETTm1).
+            log_cosine = self.config.get('diagnostics', {}).get('log_cosine_sim', False)
+            if log_cosine:
+                _, test_loader_cosine = self._get_data('test')
+                emb_samples = []
+                with torch.no_grad():
+                    for batch in test_loader_cosine:
+                        if len(batch) == 5:
+                            emb_samples.append(batch[4].float())
+                        if sum(e.shape[0] for e in emb_samples) >= 200:
+                            break
+                if emb_samples:
+                    embs = torch.cat(emb_samples, dim=0)[:200]   # [N, hidden_dim]
+                    embs_norm = torch.nn.functional.normalize(embs, dim=-1)
+                    gram = embs_norm @ embs_norm.T                # [N, N]
+                    N = gram.shape[0]
+                    # exclude diagonal (self-similarity = 1.0)
+                    mask_off = ~torch.eye(N, dtype=torch.bool)
+                    diag['cosine_sim_mean'] = float(gram[mask_off].mean())
+                    diag['cosine_sim_std']  = float(gram[mask_off].std())
+
             metrics['diagnostics'] = diag
 
         return metrics

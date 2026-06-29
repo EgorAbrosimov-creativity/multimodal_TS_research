@@ -223,3 +223,17 @@ dataset/weather/
 dataset/illness/
 dataset/exchange_rate/
 
+# Paper generation toolchain
+paper_generation/
+
+# Generated experiment configs
+experiments/
+
+# Paper artifacts
+paper_draft_backup.docx
+~$*.docx
+
+# Session / review artefacts
+HANDOVER.md
+docs/
+
