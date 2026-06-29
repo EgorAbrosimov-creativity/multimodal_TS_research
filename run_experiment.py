@@ -21,7 +21,7 @@ import yaml
 
 from layers.TextEncoder import requires_bert, BERT_MODELS
 
-REGISTRY_PATH = Path('experiments/registry.json')
+REGISTRY_PATH = Path('results/iteration3_registry.json')
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -109,6 +109,8 @@ def update_registry(config: dict, metrics: dict, result_dir: Path):
         'pred_len':       config['model']['pred_len'],
         'seq_len':        config['model']['seq_len'],
         'train_fraction': config['training'].get('train_fraction', 1.0),
+        'seed':           config['training'].get('seed', 2024),
+        'text_source':    config['model'].get('text_source', None),
         'description':    config.get('description', ''),
         'result_dir':     str(result_dir),
         'timestamp':      result_dir.name.split('_')[-2] + '_' + result_dir.name.split('_')[-1],

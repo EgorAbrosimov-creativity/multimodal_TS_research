@@ -164,7 +164,12 @@ def main():
     # ── Load encoder ──────────────────────────────────────────────────────
     print(f'\nLoading {args.model}...')
     encoder = TextEncoder(model_name=args.model)
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    if torch.cuda.is_available():
+        device = 'cuda'
+    elif torch.backends.mps.is_available():
+        device = 'mps'
+    else:
+        device = 'cpu'
     if hasattr(encoder, '_model'):
         encoder._model = encoder._model.to(device)
     print(f'Using device: {device}')

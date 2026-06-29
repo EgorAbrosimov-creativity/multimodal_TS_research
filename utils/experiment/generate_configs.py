@@ -265,26 +265,36 @@ def gen_fraction_sweep(prefix: str, models: list[str], datasets: list[str],
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
-ALL_MODELS_TIER1 = [
-    'DLinear', 'PatchTST',
-    'BERTForecaster', 'LateFusion',
-    'GatedFusion', 'FiLMFusion', 'EnsembleFusion',
-    'CrossAttentionFusion', 'ResidualCorrection',
-]
+# Iteration 3 — Stage 1: text source ablation
+# Models: GatedFusion + FiLMFusion (Iter 2 winners) + BERTForecaster (text-only ablation)
+# BERTForecaster uses template+llm only (random is meaningless for text-only model)
+STAGE1_MODELS_FUSION = ['GatedFusion', 'FiLMFusion']
+STAGE1_MODELS_BERT   = ['BERTForecaster']
+D_SERIES_SOURCES     = ['template', 'llm', 'random']
+D_SERIES_BERT_SOURCES = ['template', 'llm']
+D_SERIES_DATASETS    = ['ETTh1']
+D_SERIES_FRACS       = [1.0, 0.1]
+D_SERIES_HORIZONS    = [96, 336]
 
-D_SERIES_MODELS   = ['GatedFusion', 'CrossAttentionFusion']
-D_SERIES_SOURCES  = ['template', 'llm', 'random']
-D_SERIES_DATASETS = ['ETTh1']
-D_SERIES_FRACS    = [1.0, 0.1]
-D_SERIES_HORIZONS = [96, 336]
+# Iteration 3 — Stage 2: full sweep
+# Core models only (LateFusion deprecated, BERTForecaster is ablation-only)
+CORE_MODELS = [
+    'DLinear', 'PatchTST',
+    'GatedFusion', 'FiLMFusion', 'EnsembleFusion',
+]
+# F8/F10 validated on ETTh1 only after fixing
+FIX_MODELS = ['CrossAttentionFusion', 'ResidualCorrection']
 
 TIER1_DATASETS = ['ETTh1', 'ETTh2', 'ETTm1']
 TIER1_FRACS    = [1.0, 0.5, 0.25, 0.1, 0.05]
 TIER1_HORIZONS = [96, 336]
 
 TIER2_DATASETS = ['Weather', 'ExchangeRate']
-TIER2_FRACS    = [1.0, 0.1]
+TIER2_FRACS    = [1.0, 0.5, 0.25, 0.1, 0.05]
 TIER2_HORIZONS = [96, 336]
+
+# Legacy alias kept for backward compat with any existing scripts
+ALL_MODELS_TIER1 = CORE_MODELS + FIX_MODELS
 
 
 def main():
@@ -306,21 +316,24 @@ def main():
     args = parser.parse_args()
 
     if args.track == 'd_series':
-        models   = args.models   or D_SERIES_MODELS
-        datasets = args.datasets or D_SERIES_DATASETS
-        n = gen_d_series(models, datasets, D_SERIES_FRACS, D_SERIES_HORIZONS, D_SERIES_SOURCES,
-                         emb_dir=args.emb_dir)
+        # Stage 1: fusion models (template/llm/random) + BERTForecaster (template/llm only)
+        fusion_models = args.models or STAGE1_MODELS_FUSION
+        n = gen_d_series(fusion_models, D_SERIES_DATASETS, D_SERIES_FRACS,
+                         D_SERIES_HORIZONS, D_SERIES_SOURCES, emb_dir=args.emb_dir)
+        if not args.models:
+            n += gen_d_series(STAGE1_MODELS_BERT, D_SERIES_DATASETS, D_SERIES_FRACS,
+                              D_SERIES_HORIZONS, D_SERIES_BERT_SOURCES, emb_dir=args.emb_dir)
         print(f'D-series: wrote {n} configs to {OUT_DIR}/')
 
     elif args.track == 'tier1':
-        models   = args.models   or ALL_MODELS_TIER1
+        models   = args.models   or CORE_MODELS
         datasets = args.datasets or TIER1_DATASETS
         n = gen_fraction_sweep('t1', models, datasets, TIER1_FRACS, TIER1_HORIZONS, args.text_source,
                                emb_dir=args.emb_dir)
         print(f'Tier 1: wrote {n} configs to {OUT_DIR}/')
 
     elif args.track == 'tier2':
-        models   = args.models   or ALL_MODELS_TIER1
+        models   = args.models   or CORE_MODELS
         datasets = args.datasets or TIER2_DATASETS
         n = gen_fraction_sweep('t2', models, datasets, TIER2_FRACS, TIER2_HORIZONS, args.text_source,
                                emb_dir=args.emb_dir)
